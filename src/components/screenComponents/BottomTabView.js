@@ -1,4 +1,17 @@
+import {View, Text} from 'react-native';
 import React from 'react';
+
+const BottomTabView = () => {
+  return (
+    <View>
+      <Text>BottomTabView</Text>
+    </View>
+  );
+};
+
+export default BottomTabView;
+
+/*import React from 'react';
 import {View, Text, ScrollView} from 'react-native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Ionic from 'react-native-vector-icons/Ionicons';
@@ -126,3 +139,4 @@ const BottomTabView = () => {
 };
 
 export default BottomTabView;
+*/

@@ -3,6 +3,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './src/components/screens/Home';
+import Login from './src/components/screens/Login';
 import Search from './src/components/screens/Search';
 import Activity from './src/components/screens/Activity';
 import Profile from './src/components/screens/Profile';
@@ -36,6 +37,8 @@ const App = () => {
               iconName = focused ? 'ios-heart' : 'ios-heart-outline';
             } else if (route.name === 'Profile') {
               iconName = focused ? 'ios-person-circle' : 'ios-person-outline';
+            } else if (route.name === 'Login') {
+              iconName = focused ? 'ios-person-circle' : 'ios-person-outline';
             }
 
             return <Ionic name={iconName} size={size} color={colour} />;
@@ -45,6 +48,7 @@ const App = () => {
         <Tab.Screen name="Search" component={Search} />
         <Tab.Screen name="Activity" component={Activity} />
         <Tab.Screen name="Profile" component={Profile} />
+        <Tab.Screen name="Login" component={Login} />
       </Tab.Navigator>
     );
   };
