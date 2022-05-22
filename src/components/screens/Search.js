@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   StatusBar,
@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Dimensions,
   Image,
+  SafeAreaView,
   Text,
 } from 'react-native';
 import SearchBox from '../screenComponents/SearchBox';
@@ -25,7 +26,7 @@ const Search = () => {
   const windoeHeight = Dimensions.get('window').height;
 
   return (
-    <View
+    <SafeAreaView
       style={{
         width: '100%',
         height: '100%',
@@ -41,7 +42,7 @@ const Search = () => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <AntDesign name="pluscircleo" style={{fontSize: 40, opacity: 0.5}} />
+          <AntDesign name="pluscircleo" style={{ fontSize: 40, opacity: 0.5 }} />
         </TouchableOpacity>
       </ScrollView>
       {image ? (
@@ -81,13 +82,13 @@ const Search = () => {
                   borderRadius: 100,
                 }}
               />
-              <View style={{paddingLeft: 8}}>
-                <Text style={{fontSize: 12, fontWeight: '600'}}>
+              <View style={{ paddingLeft: 8 }}>
+                <Text style={{ fontSize: 12, fontWeight: '600' }}>
                   the_anonymous_guy
                 </Text>
               </View>
             </View>
-            <Image source={image} style={{width: '100%', height: '80%'}} />
+            <Image source={image} style={{ width: '100%', height: '80%' }} />
             <View
               style={{
                 justifyContent: 'space-around',
@@ -96,14 +97,14 @@ const Search = () => {
                 alignItems: 'center',
                 padding: 8,
               }}>
-              <Ionic name="ios-heart-outline" style={{fontSize: 26}} />
-              <Ionic name="ios-person-circle-outline" style={{fontSize: 26}} />
-              <Feather name="navigation" style={{fontSize: 26}} />
+              <Ionic name="ios-heart-outline" style={{ fontSize: 26 }} />
+              <Ionic name="ios-person-circle-outline" style={{ fontSize: 26 }} />
+              <Feather name="navigation" style={{ fontSize: 26 }} />
             </View>
           </View>
         </View>
       ) : null}
-    </View>
+    </SafeAreaView>
   );
 };
 

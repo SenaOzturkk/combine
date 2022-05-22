@@ -1,5 +1,5 @@
-import {View, Text, Image, ScrollView} from 'react-native';
-import React, {useState} from 'react';
+import { View, Text, Image, ScrollView } from 'react-native';
+import React, { useState } from 'react';
 import ChoiceLogo from '../../storage/images/choiceLogo.png';
 import CustomInput from '../screenComponents/CustomInput';
 import CustomButton from '../screenComponents/CustomButton';
@@ -32,7 +32,7 @@ const Login = () => {
       <View
         style={{
           backgroundColor: 'white',
-
+          height: '200%',
           alignItems: 'center',
         }}>
         <Image
