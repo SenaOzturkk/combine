@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "942715524654",
+    "project_id": "combine-4cb9c",
+    "storage_bucket": "combine-4cb9c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:942715524654:android:ce9d2f7a75415c626f71bf",
+        "android_client_info": {
+          "package_name": "com.combine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "942715524654-3hnleb06ef9bg58giss7m5fucepv4hu8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq48VXOjNHL7bVe8dLtuVwi1WiDvecarA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "942715524654-3hnleb06ef9bg58giss7m5fucepv4hu8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
