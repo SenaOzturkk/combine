@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, Text, ScrollView} from 'react-native';
-import {ProfileBody, ProfileButtons} from '../screenComponents/ProfileBody';
+import { View, Text, ScrollView, SafeAreaView } from 'react-native';
+import { ProfileBody, ProfileButtons } from '../screenComponents/ProfileBody';
 import Entypo from 'react-native-vector-icons/Entypo';
 import BottomTabView from '../screenComponents/BottomTabView';
 
@@ -23,7 +23,7 @@ const Profile = () => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Entypo name="plus" style={{fontSize: 40, color: 'black'}} />
+            <Entypo name="plus" style={{ fontSize: 40, color: 'black' }} />
           </View>
         ) : (
           <View
@@ -41,8 +41,8 @@ const Profile = () => {
   }
 
   return (
-    <View style={{width: '100%', height: '100%', backgroundColor: 'white'}}>
-      <View style={{width: '100%', padding: 10}}>
+    <SafeAreaView style={{ width: '100%', height: '100%', backgroundColor: 'white' }}>
+      <View style={{ width: '100%', padding: 10 }}>
         <ProfileBody
           name="Mr Peobody"
           accountName="mr_peobody"
@@ -78,7 +78,7 @@ const Profile = () => {
         </ScrollView>
       </View>
       <BottomTabView />
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -34,7 +34,20 @@ const styles = StyleSheet.create({
   container_PRIMARY: {
     backgroundColor: 'black',
   },
-
+  container_SQUARE: {
+    width: 150,
+    height: 150,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  container_CATEGORY: {
+    backgroundColor: 'gray',
+    width: 120,
+    height: 120,
+    borderColor: 'gray',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   container_TERTIARY: {
     backgroundColor: 'white',
     marginLeft: 'auto',
