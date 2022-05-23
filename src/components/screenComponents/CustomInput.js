@@ -6,6 +6,7 @@ const customInput = ({value, setValue, placeholder, secureTextEntry}) => {
     <View
       style={{
         backgroundColor: 'white',
+        height: 45,
         width: '70%',
         borderColor: '#e8e8e8',
         borderWidth: 2,

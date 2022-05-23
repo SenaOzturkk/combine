@@ -1,19 +1,25 @@
-import { View, Text, Image, ScrollView } from 'react-native';
-import React, { useState } from 'react';
+import {View, Text, Image, ScrollView} from 'react-native';
+import React, {useState} from 'react';
 import ChoiceLogo from '../../storage/images/choiceLogo.png';
 import CustomInput from '../screenComponents/CustomInput';
 import CustomButton from '../screenComponents/CustomButton';
+import {useNavigation} from '@react-navigation/native';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation();
 
   const onLoginPressed = () => {
     console.warn('login');
+    //validate user
+
+    navigation.navigate('Home');
   };
 
   const onForgotPasswordPressed = () => {
     console.warn('forgot password');
+    navigation.navigate('ForgotPassword');
   };
 
   const onSignInFacebook = () => {
@@ -26,6 +32,7 @@ const Login = () => {
 
   const onSignUpdPressed = () => {
     console.warn('sign up');
+    navigation.navigate('Register');
   };
   return (
     <ScrollView showVerticalScrollIndicator={false}>
@@ -40,8 +47,8 @@ const Login = () => {
           style={{
             width: '80%',
             height: 100,
-            marginTop: 90,
-            marginBottom: 50,
+            marginTop: 20,
+            marginBottom: 40,
           }}
           resizeMode="contain"
         />

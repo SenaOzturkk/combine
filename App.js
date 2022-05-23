@@ -4,8 +4,13 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './src/components/screens/Home';
 import Login from './src/components/screens/Login';
+import Register from './src/components/screens/Register';
+import ForgotPassword from './src/components/screens/ForgotPassword';
+import NewPassword from './src/components/screens/NewPassword';
 import Search from './src/components/screens/Search';
 import Activity from './src/components/screens/Activity';
+import Category from './src/components/screens/Category';
+import Upload from './src/components/screens/Upload';
 import Profile from './src/components/screens/Profile';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import Status from './src/components/screenComponents/Status';
@@ -15,7 +20,7 @@ import EditProfile from './src/components/screenComponents/EditProfile';
 const App = () => {
   const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
-  const bottomTabScreen = () => {
+  const BottomTabScreen = () => {
     return (
       <Tab.Navigator
         screenOptions={({route}) => ({
@@ -37,6 +42,10 @@ const App = () => {
               iconName = focused ? 'ios-heart' : 'ios-heart-outline';
             } else if (route.name === 'Profile') {
               iconName = focused ? 'ios-person-circle' : 'ios-person-outline';
+            } else if (route.name === 'Upload') {
+              iconName = focused ? 'ios-camera' : 'ios-camera-outline';
+            } else if (route.name === 'Category') {
+              iconName = focused ? 'ios-grid' : 'ios-grid-outline';
             } else if (route.name === 'Login') {
               iconName = focused ? 'ios-person-circle' : 'ios-person-outline';
             }
@@ -46,6 +55,8 @@ const App = () => {
         })}>
         <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="Search" component={Search} />
+        <Tab.Screen name="Upload" component={Upload} />
+        <Tab.Screen name="Category" component={Category} />
         <Tab.Screen name="Activity" component={Activity} />
         <Tab.Screen name="Profile" component={Profile} />
         <Tab.Screen name="Login" component={Login} />
@@ -58,10 +69,13 @@ const App = () => {
         screenOptions={{
           headerShown: false,
         }}>
-        <Stack.Screen name="Bottom" component={bottomTabScreen} />
-        <Stack.Screen name="Status" component={Status} />
+        <Stack.Screen name="Bottom" component={BottomTabScreen} />
         <Stack.Screen name="FriendProfile" component={FriendProfile} />
         <Stack.Screen name="EditProfile" component={EditProfile} />
+
+        <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+        <Stack.Screen name="NewPassword" component={NewPassword} />
       </Stack.Navigator>
     </NavigationContainer>
   );
