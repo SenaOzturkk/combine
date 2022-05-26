@@ -92,11 +92,6 @@ const Upload = () => {
           icon="ios-grid"
           data={dataCategory}
         />
-        <DropdownComponent
-          text="Şablon Tipi"
-          icon="md-earth-sharp"
-          data={dataSablon}
-        />
         <View
           style={{
             backgroundColor: 'white',

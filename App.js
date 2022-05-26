@@ -39,8 +39,6 @@ const App = () => {
               size = focused ? size + 8 : size + 2;
             } else if (route.name === 'Search') {
               iconName = focused ? 'search' : 'ios-search-outline';
-            } else if (route.name === 'Activity') {
-              iconName = focused ? 'ios-heart' : 'ios-heart-outline';
             } else if (route.name === 'Profile') {
               iconName = focused ? 'ios-person-circle' : 'ios-person-outline';
             } else if (route.name === 'Upload') {
@@ -56,7 +54,6 @@ const App = () => {
         <Tab.Screen name="Search" component={Search} />
         <Tab.Screen name="Upload" component={Upload} />
         <Tab.Screen name="Category" component={Category} />
-        <Tab.Screen name="Activity" component={Activity} />
         <Tab.Screen name="Profile" component={Profile} />
       </Tab.Navigator>
     );
@@ -71,6 +68,7 @@ const App = () => {
         <Stack.Screen name="Bottom" component={BottomTabScreen} />
         <Stack.Screen name="FriendProfile" component={FriendProfile} />
         <Stack.Screen name="EditProfile" component={EditProfile} />
+        <Stack.Screen name="Activity" component={Activity} />
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
         <Stack.Screen name="NewPassword" component={NewPassword} />
