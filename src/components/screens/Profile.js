@@ -18,7 +18,7 @@ const Profile = () => {
     const a = await AsyncStorage.getItem('USER')
     console.log(a)
     // a == null ? navigation.navigate('Login') : navigation.navigate('Bottom')
-    // await AsyncStorage.removeItem('USER')
+    await AsyncStorage.removeItem('USER')
     // await AsyncStorage.setItem('USER', '61881d3780c9116915159b1b')
   };
 
