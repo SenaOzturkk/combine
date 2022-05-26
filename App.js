@@ -1,7 +1,7 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/components/screens/Home';
 import Login from './src/components/screens/Login';
 import Register from './src/components/screens/Register';
@@ -16,6 +16,7 @@ import Ionic from 'react-native-vector-icons/Ionicons';
 import Status from './src/components/screenComponents/Status';
 import FriendProfile from './src/components/screenComponents/FriendProfile';
 import EditProfile from './src/components/screenComponents/EditProfile';
+import InitialScreen from './src/components/screens/InitialScreen';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -23,7 +24,7 @@ const App = () => {
   const BottomTabScreen = () => {
     return (
       <Tab.Navigator
-        screenOptions={({route}) => ({
+        screenOptions={({ route }) => ({
           tabBarHideOnKeyboard: true,
           tabBarShowLabel: false,
           headerShown: false,
@@ -31,7 +32,7 @@ const App = () => {
             height: 50,
           },
 
-          tabBarIcon: ({focused, size, colour}) => {
+          tabBarIcon: ({ focused, size, colour }) => {
             let iconName;
             if (route.name === 'Home') {
               iconName = focused ? 'home-sharp' : 'home-outline';
@@ -46,8 +47,6 @@ const App = () => {
               iconName = focused ? 'ios-camera' : 'ios-camera-outline';
             } else if (route.name === 'Category') {
               iconName = focused ? 'ios-grid' : 'ios-grid-outline';
-            } else if (route.name === 'Login') {
-              iconName = focused ? 'ios-person-circle' : 'ios-person-outline';
             }
 
             return <Ionic name={iconName} size={size} color={colour} />;
@@ -59,7 +58,6 @@ const App = () => {
         <Tab.Screen name="Category" component={Category} />
         <Tab.Screen name="Activity" component={Activity} />
         <Tab.Screen name="Profile" component={Profile} />
-        <Tab.Screen name="Login" component={Login} />
       </Tab.Navigator>
     );
   };
@@ -69,13 +67,14 @@ const App = () => {
         screenOptions={{
           headerShown: false,
         }}>
+        <Stack.Screen name="Initial" component={InitialScreen} />
         <Stack.Screen name="Bottom" component={BottomTabScreen} />
         <Stack.Screen name="FriendProfile" component={FriendProfile} />
         <Stack.Screen name="EditProfile" component={EditProfile} />
-
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
         <Stack.Screen name="NewPassword" component={NewPassword} />
+        <Stack.Screen name="Login" component={Login} />
       </Stack.Navigator>
     </NavigationContainer>
   );
