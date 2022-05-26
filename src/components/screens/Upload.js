@@ -34,9 +34,36 @@ const Upload = () => {
         mediaType: 'photo',
       },
       includeBase64: true,*/
-      /* includeBase64: true,
+      includeBase64: true,
       mediaType: 'photo',
-      quality: 1,*/
+      quality: 1,
+      noData: true,
+    };
+    launchCamera(options, response => {
+      console.log('response', response);
+      if (response.didCancel) {
+        console.log('user cancelled image picker');
+      } else if (response.error) {
+        console.log(' image picker error', response.error);
+      } else if (response.customButton) {
+        console.log('user cancelled image picker', response.customButton);
+      } else {
+        // const source = {uri: 'data:/image/jpeg,' + response.base64};
+        // setImageUri(response.assest[0].base64);
+        setImageUri(response);
+      }
+    });
+  };
+  const openGallery = () => {
+    let options = {
+      /* storageOptions: {
+        path: 'images',
+        mediaType: 'photo',
+      },
+      includeBase64: true,*/
+      includeBase64: true,
+      mediaType: 'photo',
+      quality: 1,
       noData: true,
     };
     launchImageLibrary(options, response => {
@@ -77,34 +104,23 @@ const Upload = () => {
             flexDirection: 'row',
             justifyContent: 'center',
             width: '100%',
+            maxHeight: 200,
           }}>
           <CustomButton
             text="Open Camera"
-            onPress={handleChoosePhoto}
+            onPress={openCamera}
             bgColor="#FAE9EA"
             fgColor="#DD4D44"
             type="SQUARE"
           />
-          {imageUri && (
-            <Image
-              source={{uri: imageUri.uri}}
-              style={{height: 10, width: 10}}
-            />
-          )}
 
           <CustomButton
             text="Open Gallery"
-            onPress={handleChoosePhoto}
+            onPress={openGallery}
             bgColor="#FAE9EA"
             fgColor="#DD4D44"
             type="SQUARE"
           />
-          {imageUri && (
-            <Image
-              source={{uri: 'data:image/png;base64,' + imageUri}}
-              style={{height: 10, width: 10}}
-            />
-          )}
         </View>
         <View style={styles.bottomContainer}>
           <CustomInput
@@ -133,8 +149,22 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     width: 510,
     alignItems: 'center',
-    marginTop: 10,
   },
 });
 
 export default Upload;
+
+/*import {View, Text} from 'react-native';
+import React from 'react';
+
+const Upload = () => {
+  return (
+    <View>
+      <Text>Upload</Text>
+    </View>
+  );
+};
+
+export default Upload;
+
+*/

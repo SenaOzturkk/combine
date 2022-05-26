@@ -1,8 +1,18 @@
-import {View, Text, SafeAreaView, ScrollView, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import React from 'react';
 import SearchBox from '../screenComponents/SearchBox';
 import {useNavigation} from '@react-navigation/native';
 import CustomButton from '../screenComponents/CustomButton';
+import ChoiceLogo from '../../storage/images/choiceLogo.png';
+
 const Category = () => {
   const navigation = useNavigation();
   const onForgotPasswordPressed = () => {
@@ -18,6 +28,15 @@ const Category = () => {
         position: 'relative',
       }}>
       <ScrollView showsVerticalScrollIndicator={false}>
+        <Image
+          source={ChoiceLogo}
+          style={{
+            width: '100%',
+            height: 50,
+            alignItems: 'center',
+          }}
+          resizeMode="contain"
+        />
         <SearchBox />
         <Text style={styles.text}>KATEGORİLER</Text>
 
@@ -28,23 +47,37 @@ const Category = () => {
             flexDirection: 'row',
             justifyContent: 'space-around',
           }}>
-          <CustomButton
-            text="Giyim"
-            onPress={onForgotPasswordPressed}
-            type="CATEGORY"
-            fgColor="white"
-          />
-          <CustomButton
-            text="Teknoloji"
-            onPress={onForgotPasswordPressed}
-            type="CATEGORY"
-          />
-          <CustomButton
-            text="Araba"
-            onPress={onForgotPasswordPressed}
-            type="CATEGORY"
-          />
+          <TouchableOpacity
+          /*onPress={() => navigation.goBack()}*/
+          >
+            <Image
+              source={require('../../storage/images/ayakkabi.png')}
+              style={{
+                width: 120,
+                height: 150,
+              }}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image
+              source={require('../../storage/images/giyim.png')}
+              style={{
+                width: 120,
+                height: 150,
+              }}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image
+              source={require('../../storage/images/saat.png')}
+              style={{
+                width: 120,
+                height: 150,
+              }}
+            />
+          </TouchableOpacity>
         </View>
+
         <View
           style={{
             backgroundColor: 'white',
@@ -52,23 +85,35 @@ const Category = () => {
             flexDirection: 'row',
             justifyContent: 'space-around',
           }}>
-          <CustomButton
-            text="Eşya"
-            onPress={onForgotPasswordPressed}
-            type="CATEGORY"
-          />
-          <CustomButton
-            text="Hediye"
-            onPress={onForgotPasswordPressed}
-            type="CATEGORY"
-          />
-          <CustomButton
-            text="Tatil"
-            onPress={onForgotPasswordPressed}
-            type="CATEGORY"
-          />
+          <TouchableOpacity>
+            <Image
+              source={require('../../storage/images/kombin.png')}
+              style={{
+                width: 120,
+                height: 150,
+              }}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image
+              source={require('../../storage/images/hediye.png')}
+              style={{
+                width: 120,
+                height: 150,
+              }}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image
+              source={require('../../storage/images/tatil.png')}
+              style={{
+                width: 120,
+                height: 150,
+              }}
+            />
+          </TouchableOpacity>
         </View>
-        <Text style={styles.text}>ŞABLON TİPİ</Text>
+
         <View
           style={{
             backgroundColor: 'white',
@@ -76,21 +121,33 @@ const Category = () => {
             flexDirection: 'row',
             justifyContent: 'space-around',
           }}>
-          <CustomButton
-            text="Tekli"
-            onPress={onForgotPasswordPressed}
-            type="CATEGORY"
-          />
-          <CustomButton
-            text="İkili"
-            onPress={onForgotPasswordPressed}
-            type="CATEGORY"
-          />
-          <CustomButton
-            text="Çoklu"
-            onPress={onForgotPasswordPressed}
-            type="CATEGORY"
-          />
+          <TouchableOpacity>
+            <Image
+              source={require('../../storage/images/vasıta.png')}
+              style={{
+                width: 120,
+                height: 150,
+              }}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image
+              source={require('../../storage/images/elektronik.png')}
+              style={{
+                width: 120,
+                height: 150,
+              }}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image
+              source={require('../../storage/images/ev.png')}
+              style={{
+                width: 120,
+                height: 150,
+              }}
+            />
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </SafeAreaView>
