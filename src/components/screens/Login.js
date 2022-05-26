@@ -1,20 +1,34 @@
-import {View, Text, Image, ScrollView} from 'react-native';
-import React, {useState} from 'react';
+import { View, Text, Image, ScrollView } from 'react-native';
+import React, { useState } from 'react';
 import ChoiceLogo from '../../storage/images/choiceLogo.png';
 import CustomInput from '../screenComponents/CustomInput';
 import CustomButton from '../screenComponents/CustomButton';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+
+const baseUrl = 'http://localhost:5001/api/'
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
 
-  const onLoginPressed = () => {
+  const onLoginPressed = async () => {
     console.warn('login');
     //validate user
-
-    navigation.navigate('Home');
+    const response = await axios({
+      method: 'post',
+      url: baseUrl + 'auth/login',
+      headers: {},
+      data: {
+        email: username,
+        password: password
+      }
+    });
+    console.log(response.data.userID)
+    await AsyncStorage.setItem('USER', response.data.userID)
+    navigation.navigate('Bottom')
   };
 
   const onForgotPasswordPressed = () => {
@@ -22,12 +36,15 @@ const Login = () => {
     navigation.navigate('ForgotPassword');
   };
 
-  const onSignInFacebook = () => {
-    console.warn('facebook');
+  const onSignInFacebook = async () => {
+    const x = await AsyncStorage.getItem('USER')
+    console.log(x)
+
   };
 
-  const onSignInGoogle = () => {
+  const onSignInGoogle = async () => {
     console.warn('google');
+    await AsyncStorage.setItem('USER', '61881d3780c9116915159b1b')
   };
 
   const onSignUpdPressed = () => {
