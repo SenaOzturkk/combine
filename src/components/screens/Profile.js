@@ -3,10 +3,26 @@ import { View, Text, ScrollView, SafeAreaView } from 'react-native';
 import { ProfileBody, ProfileButtons } from '../screenComponents/ProfileBody';
 import Entypo from 'react-native-vector-icons/Entypo';
 import BottomTabView from '../screenComponents/BottomTabView';
+import CustomButton from '../screenComponents/CustomButton';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
 const Profile = () => {
+  const navigation = useNavigation();
+
   let circuls = [];
   let numberofcircels = 10;
+
+
+  const isUserSignedIn = async () => {
+    const a = await AsyncStorage.getItem('USER')
+    console.log(a)
+    // a == null ? navigation.navigate('Login') : navigation.navigate('Bottom')
+    // await AsyncStorage.removeItem('USER')
+    // await AsyncStorage.setItem('USER', '61881d3780c9116915159b1b')
+  };
+
+
 
   for (let index = 0; index < numberofcircels; index++) {
     circuls.push(
@@ -77,6 +93,12 @@ const Profile = () => {
           {circuls}
         </ScrollView>
       </View>
+      <CustomButton
+        text="Sign In with Facebook"
+        onPress={isUserSignedIn}
+        bgColor="#E7EAF4"
+        fgColor="#4765A9"
+      />
       <BottomTabView />
     </SafeAreaView>
   );
