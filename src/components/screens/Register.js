@@ -1,8 +1,12 @@
-import {View, Text, ScrollView, StyleSheet} from 'react-native';
-import React, {useState} from 'react';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
 import CustomInput from '../screenComponents/CustomInput';
 import CustomButton from '../screenComponents/CustomButton';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const baseUrl = 'http://10.100.0.11:5000/api/'
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -11,9 +15,24 @@ const Login = () => {
   const [passwordRepeat, setPasswordRepeat] = useState('');
   const navigation = useNavigation();
 
-  const onRegisterPressed = () => {
-    console.warn('register');
-    navigation.navigate('Login');
+  const onRegisterPressed = async () => {
+    const response = await axios({
+      method: 'post',
+      url: baseUrl + 'auth/sign-up',
+      headers: {},
+      data: {
+        email: email,
+        password: password,
+        username: username
+      }
+    });
+    console.log(response.data)
+    console.log(response.data.insertedId)
+    if (response.data.insertedId != null || response.data.insertedId != undefined) {
+      await AsyncStorage.setItem('USER', response.data.insertedId)
+      navigation.navigate('Bottom');
+    }
+
   };
 
   const onTermsOfUsePressed = () => {

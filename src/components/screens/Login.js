@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:5001/api/'
+const baseUrl = 'http://10.100.0.11:5000/api/'
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -26,7 +26,7 @@ const Login = () => {
         password: password
       }
     });
-    console.log(response.data.userID)
+    console.log(response.data)
     await AsyncStorage.setItem('USER', response.data.userID)
     navigation.navigate('Bottom')
   };

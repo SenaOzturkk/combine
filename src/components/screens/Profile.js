@@ -7,6 +7,7 @@ import CustomButton from '../screenComponents/CustomButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 
+
 const Profile = () => {
   const navigation = useNavigation();
 
