@@ -177,12 +177,12 @@ const Post = ({ postInfo }) => {
               }}>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Image
-                  source={data.postPersonImage}
+                  source={{ uri: data.userPicture[0] }}
                   style={{ width: 40, height: 40, borderRadius: 100 }}
                 />
                 <View style={{ paddingLeft: 5 }}>
                   <Text style={{ fontSize: 15, fontWeight: 'bold' }}>
-                    {data.postTitle}
+                    {data.userdetails[0].username}
                   </Text>
                 </View>
               </View>
@@ -321,7 +321,7 @@ const Post = ({ postInfo }) => {
                 style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <Image
-                    source={data.postPersonImage}
+                    source={{ uri: data.userPicture[0] }}
                     style={{
                       width: 25,
                       height: 25,

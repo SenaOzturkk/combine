@@ -14,23 +14,14 @@ const Home = () => {
   const [loading, setLoading] = useState(true)
   const navigation = useNavigation();
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     console.log(baseURL)
-  //     // const response = await fetch('http://10.100.0.11:5000/api/post/')
-  //     const response = await axios({
-  //       url: 'http://10.100.0.11:5000/api/post',
-  //       headers: {},
-  //       data: {}
-  //     });
-  //     console.log(response.data)
-  //   }
-  //   fetchData()
-  // }, [])
+  useEffect(() => {
+    fetchData()
+  }, [])
 
 
-  const onActivityPressed = () => {
-    fetch('http://10.100.0.11:5000/api/post')
+  const fetchData = () => {
+    fetch(baseURL + 'post')
+
       .then(function (response) {
         return response.json();
       })
@@ -42,10 +33,9 @@ const Home = () => {
         console.log('There has been a problem with your fetch operation: ' + error.message);
         throw error;
       });
-
-
   };
-  const onActivityPressed2 = () => {
+
+  const onActivityPressed = () => {
     console.warn('activity');
     navigation.navigate('Activity');
   };
