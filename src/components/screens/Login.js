@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-const baseUrl = 'http://10.100.0.11:5000/api/'
+import baseURL from '../baseURL';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -19,7 +19,7 @@ const Login = () => {
     //validate user
     const response = await axios({
       method: 'post',
-      url: baseUrl + 'auth/login',
+      url: baseURL + 'auth/login',
       headers: {},
       data: {
         email: username,

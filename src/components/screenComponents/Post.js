@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
-import {View, Text, Image, TouchableOpacity, TextInput} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, TouchableOpacity, TextInput } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 //import {AntDesign} from '@ant-design/icons';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 
-const Post = () => {
-  const postInfo = [
+const Post = ({ postInfo }) => {
+  const postInfos = [
     {
       postType: 3,
       postTitle: 'mr shermon',
@@ -71,91 +71,83 @@ const Post = () => {
     },
   ];
   const setPost = data => {
-    console.warn('data', data);
-    if (data.postType === 1) {
+    if (data.mediaCount === 1) {
       return (
-        <Image source={data.postImage0} style={{width: '100%', height: 400}} />
+        <Image source={{ uri: data.medias[0] }} style={{ width: '100%', height: 400 }} />
       );
-    } else if (data.postType === 2) {
+    } else if (data.mediaCount === 2) {
       return (
         <>
           <Image
-            source={data.postImage0}
-            style={{width: '100%', height: 400}}
+            source={{ uri: data.medias[0] }}
+            style={{ width: '100%', height: 400 }}
           />
           <Image
-            source={data.postImage1}
-            style={{width: '100%', height: 400}}
+            source={{ uri: data.medias[1] }}
+            style={{ width: '100%', height: 400 }}
           />
         </>
       );
-    } else if (data.postType === 3) {
+    } else if (data.mediaCount === 3) {
       return (
         <>
-          <View style={{flexDirection: 'row'}}>
-            <View style={{flexDirection: 'column'}}>
-              <Text
+          <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'column' }}>
+              <Image
                 style={{
                   flex: 1,
-                  backgroundColor: 'red',
                   width: 200,
                   height: 200,
-                }}>
-                1
-              </Text>
-
-              <Text
+                }}
+                source={{ uri: data.medias[0] }}
+              />
+              <Image
                 style={{
                   flex: 1,
-                  backgroundColor: 'blue',
                   width: 200,
                   height: 200,
-                }}>
-                2
-              </Text>
+                }}
+                source={{ uri: data.medias[1] }}
+              />
             </View>
-            <View style={{flexDirection: 'row'}}>
-              <Text
+            <View style={{ flexDirection: 'row' }}>
+              <Image
                 style={{
                   flexDirection: 'row',
                   width: 200,
                   height: 400,
                   backgroundColor: 'yellow',
-                }}>
-                3
-              </Text>
+                }}
+                source={{ uri: data.medias[2] }}
+              />
             </View>
           </View>
         </>
       );
-    } else if (data.postType === 4) {
+    } else if (data.mediaCount === 4) {
       return (
         <>
           <Image
-            source={data.postImage0}
-            style={{width: '100%', height: 400}}
+            source={{ uri: data.medias[0] }}
+            style={{ width: '100%', height: 400 }}
           />
           <Image
-            source={data.postImage1}
-            style={{width: '100%', height: 400}}
+            source={{ uri: data.medias[1] }}
+            style={{ width: '100%', height: 400 }}
           />
           <Image
-            source={data.postImage2}
-            style={{width: '100%', height: 400}}
+            source={{ uri: data.medias[2] }}
+            style={{ width: '100%', height: 400 }}
           />
           <Image
-            source={data.postImage3}
-            style={{width: '100%', height: 400}}
-          />
-          <Image
-            source={data.postImage4}
-            style={{width: '100%', height: 400}}
+            source={{ uri: data.medias[3] }}
+            style={{ width: '100%', height: 400 }}
           />
         </>
       );
     } else {
       return (
-        <Image source={data.postImage0} style={{width: '100%', height: 400}} />
+        <Image source={data.postImage0} style={{ width: '100%', height: 400 }} />
       );
     }
   };
@@ -165,8 +157,8 @@ const Post = () => {
       {postInfo.map((data, index) => {
         const [percentLeft, setPercentLeft] = useState(data.isPressedLeft);
         const [percentRight, setPercentRight] = useState(data.isPressedRight);
-        const [question, setQuestion] = useState(data.question);
-        const [postType, setPostType] = useState(data.postType);
+        const [question, setQuestion] = useState(data.description);
+        const [postType, setPostType] = useState(data.mediaCount);
 
         return (
           <View
@@ -183,13 +175,13 @@ const Post = () => {
                 justifyContent: 'space-between',
                 padding: 15,
               }}>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Image
                   source={data.postPersonImage}
-                  style={{width: 40, height: 40, borderRadius: 100}}
+                  style={{ width: 40, height: 40, borderRadius: 100 }}
                 />
-                <View style={{paddingLeft: 5}}>
-                  <Text style={{fontSize: 15, fontWeight: 'bold'}}>
+                <View style={{ paddingLeft: 5 }}>
+                  <Text style={{ fontSize: 15, fontWeight: 'bold' }}>
                     {data.postTitle}
                   </Text>
                 </View>
@@ -208,7 +200,7 @@ const Post = () => {
                   style={{
                     fontSize: 15,
                   }}>
-                  {data.question}
+                  {data.description}
                 </Text>
               ) : (
                 <Text></Text>
@@ -278,7 +270,7 @@ const Post = () => {
                 </TouchableOpacity>
               </View>
             </View>
-            <View style={{paddingHorizontal: 15}}>
+            <View style={{ paddingHorizontal: 15 }}>
               <Text>
                 {percentLeft ? (
                   <>
@@ -294,7 +286,7 @@ const Post = () => {
                       {100 -
                         ((data.LeftVoteCount + 1) /
                           (data.LeftVoteCount + data.RightVoteCount + 1)) *
-                          100}
+                        100}
                     </Text>
                   </>
                 ) : (
@@ -309,7 +301,7 @@ const Post = () => {
                       {100 -
                         ((data.RightVoteCount + 1) /
                           (data.LeftVoteCount + data.RightVoteCount + 1)) *
-                          100}
+                        100}
                     </Text>
                     <Text>
                       right:{' '}
@@ -322,12 +314,12 @@ const Post = () => {
                   ''
                 )}
               </Text>
-              <Text style={{opacity: 0.4, paddingVertical: 2}}>
+              <Text style={{ opacity: 0.4, paddingVertical: 2 }}>
                 View all comments
               </Text>
               <View
-                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <Image
                     source={data.postPersonImage}
                     style={{
@@ -340,21 +332,21 @@ const Post = () => {
                   />
                   <TextInput
                     placeholder="Add a comment "
-                    style={{opacity: 0.5}}
+                    style={{ opacity: 0.5 }}
                   />
                 </View>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <Entypo
                     name="emoji-happy"
-                    style={{fontSize: 15, color: 'lightgreen', marginRight: 10}}
+                    style={{ fontSize: 15, color: 'lightgreen', marginRight: 10 }}
                   />
                   <Entypo
                     name="emoji-neutral"
-                    style={{fontSize: 15, color: 'pink', marginRight: 10}}
+                    style={{ fontSize: 15, color: 'pink', marginRight: 10 }}
                   />
                   <Entypo
                     name="emoji-sad"
-                    style={{fontSize: 15, color: 'red'}}
+                    style={{ fontSize: 15, color: 'red' }}
                   />
                 </View>
               </View>

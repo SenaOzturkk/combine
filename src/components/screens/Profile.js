@@ -23,7 +23,12 @@ const Profile = () => {
     // await AsyncStorage.setItem('USER', '61881d3780c9116915159b1b')
   };
 
-
+  const isUserLoggedIn = async () => {
+    const a = await AsyncStorage.getItem('USER')
+    console.log(a)
+    // a == null ? navigation.navigate('Login') : navigation.navigate('Bottom')
+    // await AsyncStorage.setItem('USER', '61881d3780c9116915159b1b')
+  };
 
   for (let index = 0; index < numberofcircels; index++) {
     circuls.push(
@@ -97,6 +102,11 @@ const Profile = () => {
       <CustomButton
         text="Sign In with Facebook"
         onPress={isUserSignedIn}
+        bgColor="#E7EAF4"
+        fgColor="#4765A9"
+      /><CustomButton
+        text="Print"
+        onPress={isUserLoggedIn}
         bgColor="#E7EAF4"
         fgColor="#4765A9"
       />

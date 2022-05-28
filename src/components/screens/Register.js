@@ -5,8 +5,7 @@ import CustomButton from '../screenComponents/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const baseUrl = 'http://10.100.0.11:5000/api/'
+import baseURL from '../baseURL';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -18,7 +17,7 @@ const Login = () => {
   const onRegisterPressed = async () => {
     const response = await axios({
       method: 'post',
-      url: baseUrl + 'auth/sign-up',
+      url: baseURL + 'auth/sign-up',
       headers: {},
       data: {
         email: email,
