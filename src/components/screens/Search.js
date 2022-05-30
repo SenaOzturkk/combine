@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   StatusBar,
@@ -36,14 +36,6 @@ const Search = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <SearchBox />
         <SearchContent data={getData} />
-        <TouchableOpacity
-          style={{
-            margin: 25,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <AntDesign name="pluscircleo" style={{ fontSize: 40, opacity: 0.5 }} />
-        </TouchableOpacity>
       </ScrollView>
       {image ? (
         <View
@@ -75,20 +67,20 @@ const Search = () => {
                 paddingHorizontal: 15,
               }}>
               <Image
-                source={image}
+                source={image} //pp
                 style={{
                   width: 30,
                   height: 30,
                   borderRadius: 100,
                 }}
               />
-              <View style={{ paddingLeft: 8 }}>
-                <Text style={{ fontSize: 12, fontWeight: '600' }}>
+              <View style={{paddingLeft: 8}}>
+                <Text style={{fontSize: 12, fontWeight: '600'}}>
                   the_anonymous_guy
                 </Text>
               </View>
             </View>
-            <Image source={image} style={{ width: '100%', height: '80%' }} />
+            <Image source={image} style={{width: '100%', height: '80%'}} />
             <View
               style={{
                 justifyContent: 'space-around',
@@ -97,9 +89,9 @@ const Search = () => {
                 alignItems: 'center',
                 padding: 8,
               }}>
-              <Ionic name="ios-heart-outline" style={{ fontSize: 26 }} />
-              <Ionic name="ios-person-circle-outline" style={{ fontSize: 26 }} />
-              <Feather name="navigation" style={{ fontSize: 26 }} />
+              <Ionic name="ios-heart-outline" style={{fontSize: 26}} />
+              <Ionic name="ios-person-circle-outline" style={{fontSize: 26}} />
+              <Feather name="navigation" style={{fontSize: 26}} />
             </View>
           </View>
         </View>

@@ -1,125 +1,154 @@
-import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, TextInput } from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-//import {AntDesign} from '@ant-design/icons';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StatusBar,
+  Dimensions,
+} from 'react-native';
 import Ionic from 'react-native-vector-icons/Ionicons';
-import Entypo from 'react-native-vector-icons/Entypo';
+import {useNavigation} from '@react-navigation/native';
 
-const Post = ({ postInfo }) => {
-  const postInfos = [
-    {
-      postType: 3,
-      postTitle: 'mr shermon',
-      postPersonImage: require('../../storage/images/userProfile.png'),
-      postImage0: require('../../storage/images/post2.jpg'),
-      postImage1: require('../../storage/images/post3.jpg'),
-      postImage2: require('../../storage/images/post4.jpg'),
-      LeftVoteCount: 60,
-      RightVoteCount: 40,
-      isPressedLeft: false,
-      isPressedRight: false,
-      question:
-        'Telefon alacağım İphone 12 pro max hangi renk alsam kararsız kaldım. ',
-    },
-    {
-      postType: 2,
-      postTitle: 'deneme',
-      postPersonImage: require('../../storage/images/userProfile.png'),
-      postImage0: require('../../storage/images/post2.jpg'),
-      postImage1: require('../../storage/images/post3.jpg'),
-      LeftVoteCount: 60,
-      RightVoteCount: 40,
-      isPressedLeft: false,
-      isPressedRight: false,
-      question:
-        'Telefon alacağım İphone 12 pro max hangi renk alsam kararsız kaldım. ',
-    },
-    {
-      postType: 1,
-      postTitle: 'chillhouse',
-      postPersonImage: require('../../storage/images/profile4.jpg'),
-      postImage0: require('../../storage/images/post2.jpg'),
-      LeftVoteCount: 30,
-      RightVoteCount: 70,
-      isPressedLeft: false,
-      isPressedRight: false,
-      question:
-        'Arkadşaıma doğum günü hediyesi olarak alacağım renk konusunda kararsız kaldım',
-    },
-    {
-      postType: 1,
-      postTitle: 'Tomss',
-      postPersonImage: require('../../storage/images/profile4.jpg'),
-      postImage0: require('../../storage/images/post3.jpg'),
-      LeftVoteCount: 50,
-      RightVoteCount: 50,
-      isPressedLeft: false,
-      isPressedRight: false,
-      question: 'Akşam dışarı çıkacağım hangi kolye daha şık?',
-    },
-    {
-      postType: 2,
-      postTitle: 'The_Groot',
-      postPersonImage: require('../../storage/images/profile3.jpg'),
-      postImage0: require('../../storage/images/post4.jpg'),
-      postImage1: require('../../storage/images/post5.jpg'),
-      LeftVoteCount: 20,
-      RightVoteCount: 80,
-      isPressedLeft: false,
-      isPressedRight: false,
-    },
-  ];
+const Post = ({postInfo}) => {
+  const windowWidth = Dimensions.get('window').width;
+  const windoeHeight = Dimensions.get('window').height;
+  const [image, setImage] = useState(null);
+  const navigation = useNavigation();
+
+  const askQuestion = () => {
+    console.warn(' ask ques');
+    navigation.navigate('Question');
+  };
+  const onPressActivity = data => {
+    // console.warn(' press');
+  };
+  const onPressOutActivity = data => {
+    //console.warn(' press out');
+    setImage(null);
+  };
+  const onLongPressActivity = data => {
+    // console.warn('long press');
+    setImage(data);
+  };
+
   const setPost = data => {
     if (data.mediaCount === 1) {
       return (
-        <Image source={{ uri: data.medias[0] }} style={{ width: '100%', height: 400 }} />
+        <TouchableOpacity
+          onPress={() => onPressActivity(data)}
+          onPressOut={() => onPressOutActivity(data)}
+          onPressIn={() => {
+            onLongPressActivity(data.medias[0]);
+          }}
+          style={{width: '100%', height: 400}}>
+          <Image
+            source={{uri: data.medias[0]}}
+            style={{width: '100%', height: 400}}
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
       );
     } else if (data.mediaCount === 2) {
       return (
         <>
-          <Image
-            source={{ uri: data.medias[0] }}
-            style={{ width: '100%', height: 400 }}
-          />
-          <Image
-            source={{ uri: data.medias[1] }}
-            style={{ width: '100%', height: 400 }}
-          />
+          <TouchableOpacity
+            style={{width: 200, height: 400}}
+            // onPress={() => onPressActivity(data)}
+            onPressOut={() => onPressOutActivity(data)}
+            onPressIn={() => {
+              onLongPressActivity(data.medias[0]);
+            }}>
+            <Image
+              source={{uri: data.medias[0]}}
+              resizeMode="contain"
+              style={{width: 200, height: 400}}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={{width: 200, height: 400}}
+            // onPress={() => onPressActivity(data)}
+            onPressOut={() => onPressOutActivity(data)}
+            onPressIn={() => {
+              onLongPressActivity(data.medias[0]);
+            }}>
+            <Image
+              source={{uri: data.medias[1]}}
+              resizeMode="contain"
+              style={{width: 200, height: 400}}
+            />
+          </TouchableOpacity>
         </>
       );
     } else if (data.mediaCount === 3) {
       return (
         <>
-          <View style={{ flexDirection: 'row' }}>
-            <View style={{ flexDirection: 'column' }}>
-              <Image
+          <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'column'}}>
+              <TouchableOpacity
                 style={{
                   flex: 1,
                   width: 200,
                   height: 200,
                 }}
-                source={{ uri: data.medias[0] }}
-              />
-              <Image
+                // onPress={() => onPressActivity(data)}
+                onPressOut={() => onPressOutActivity(data)}
+                onPressIn={() => {
+                  onLongPressActivity(data.medias[0]);
+                }}>
+                <Image
+                  style={{
+                    flex: 1,
+                    width: 200,
+                    height: 200,
+                  }}
+                  source={{uri: data.medias[0]}}
+                />
+              </TouchableOpacity>
+
+              <TouchableOpacity
                 style={{
                   flex: 1,
                   width: 200,
                   height: 200,
                 }}
-                source={{ uri: data.medias[1] }}
-              />
+                onPressOut={() => onPressOutActivity(data)}
+                // onPress={() => onPressActivity(data)}
+                onPressIn={() => {
+                  onLongPressActivity(data.medias[1]);
+                }}>
+                <Image
+                  style={{
+                    flex: 1,
+                    width: 200,
+                    height: 200,
+                  }}
+                  source={{uri: data.medias[1]}}
+                />
+              </TouchableOpacity>
             </View>
-            <View style={{ flexDirection: 'row' }}>
-              <Image
+            <View style={{flexDirection: 'row'}}>
+              <TouchableOpacity
                 style={{
                   flexDirection: 'row',
                   width: 200,
                   height: 400,
-                  backgroundColor: 'yellow',
                 }}
-                source={{ uri: data.medias[2] }}
-              />
+                onPressOut={() => onPressOutActivity(data)}
+                //onPress={() => onPressActivity(data)}
+                onPressIn={() => {
+                  onLongPressActivity(data.medias[2]);
+                }}>
+                <Image
+                  style={{
+                    flexDirection: 'row',
+                    width: 200,
+                    height: 400,
+                  }}
+                  source={{uri: data.medias[2]}}
+                />
+              </TouchableOpacity>
             </View>
           </View>
         </>
@@ -128,26 +157,26 @@ const Post = ({ postInfo }) => {
       return (
         <>
           <Image
-            source={{ uri: data.medias[0] }}
-            style={{ width: '100%', height: 400 }}
+            source={{uri: data.medias[0]}}
+            style={{width: '100%', height: 400}}
           />
           <Image
-            source={{ uri: data.medias[1] }}
-            style={{ width: '100%', height: 400 }}
+            source={{uri: data.medias[1]}}
+            style={{width: '100%', height: 400}}
           />
           <Image
-            source={{ uri: data.medias[2] }}
-            style={{ width: '100%', height: 400 }}
+            source={{uri: data.medias[2]}}
+            style={{width: '100%', height: 400}}
           />
           <Image
-            source={{ uri: data.medias[3] }}
-            style={{ width: '100%', height: 400 }}
+            source={{uri: data.medias[3]}}
+            style={{width: '100%', height: 400}}
           />
         </>
       );
     } else {
       return (
-        <Image source={data.postImage0} style={{ width: '100%', height: 400 }} />
+        <Image source={data.postImage0} style={{width: '100%', height: 400}} />
       );
     }
   };
@@ -157,8 +186,8 @@ const Post = ({ postInfo }) => {
       {postInfo.map((data, index) => {
         const [percentLeft, setPercentLeft] = useState(data.isPressedLeft);
         const [percentRight, setPercentRight] = useState(data.isPressedRight);
-        const [question, setQuestion] = useState(data.description);
-        const [postType, setPostType] = useState(data.mediaCount);
+        const [description, setQuestion] = useState(data.description);
+        const [mediaCount, setMediaCount] = useState(data.mediaCount);
 
         return (
           <View
@@ -175,13 +204,13 @@ const Post = ({ postInfo }) => {
                 justifyContent: 'space-between',
                 padding: 15,
               }}>
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <Image
-                  source={{ uri: data.userPicture[0] }}
-                  style={{ width: 40, height: 40, borderRadius: 100 }}
+                  source={{uri: data.userPicture[0]}}
+                  style={{width: 40, height: 40, borderRadius: 100}}
                 />
-                <View style={{ paddingLeft: 5 }}>
-                  <Text style={{ fontSize: 15, fontWeight: 'bold' }}>
+                <View style={{paddingLeft: 5}}>
+                  <Text style={{fontSize: 15, fontWeight: 'bold'}}>
                     {data.userdetails[0].username}
                   </Text>
                 </View>
@@ -195,12 +224,12 @@ const Post = ({ postInfo }) => {
                 textAlign: 'left',
                 marginTop: -10,
               }}>
-              {question ? (
+              {description ? (
                 <Text
                   style={{
                     fontSize: 15,
                   }}>
-                  {data.description}
+                  {description}
                 </Text>
               ) : (
                 <Text></Text>
@@ -214,7 +243,113 @@ const Post = ({ postInfo }) => {
                 {setPost(data)}
               </View>
             </View>
-            <View
+            {image ? (
+              <View
+                style={{
+                  position: 'absolute',
+                  zIndex: 1,
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: 'rgba(52,52,52,0.8)',
+                }}>
+                <StatusBar backgroundColor="#525252" barStyle="dark-content" />
+                <View
+                  style={{
+                    position: 'absolute',
+                    top: windoeHeight / 6,
+                    left: windowWidth / 18,
+                    backgroundColor: 'white',
+                    width: '90%',
+                    height: 465,
+                    borderRadius: 15,
+                    zIndex: 1,
+                    elevation: 50,
+                  }}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      paddingVertical: 10,
+                      paddingHorizontal: 15,
+                    }}>
+                    <Image
+                      source={{uri: image}}
+                      style={{
+                        width: 30,
+                        height: 30,
+                        borderRadius: 100,
+                      }}
+                    />
+                    <View style={{paddingLeft: 8}}>
+                      <Text style={{fontSize: 12, fontWeight: '600'}}>
+                        the_anonymous_guy
+                      </Text>
+                    </View>
+                  </View>
+                  <Image
+                    source={{uri: image}}
+                    style={{width: '100%', height: '80%'}}
+                  />
+                  <View
+                    style={{
+                      justifyContent: 'space-around',
+                      width: '100%',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      padding: 8,
+                    }}>
+                    <Ionic name="ios-heart-outline" style={{fontSize: 26}} />
+                    <Ionic
+                      name="ios-person-circle-outline"
+                      style={{fontSize: 26}}
+                    />
+                  </View>
+                </View>
+              </View>
+            ) : null}
+
+            <TouchableOpacity onPress={() => askQuestion()}>
+              <Ionic
+                name="ios-help-circle"
+                style={{
+                  fontSize: 30,
+                  paddingRight: 10,
+                }}
+              />
+            </TouchableOpacity>
+          </View>
+        );
+      })}
+    </View>
+  );
+};
+
+export default Post;
+
+/*
+ <TouchableOpacity onPress={() => setLike(!like)}>
+                  <Ionic
+                    name={like ? 'ios-heart' : 'ios-heart-outline'}
+                    style={{
+                      fontSize: 20,
+                      paddingRight: 10,
+                      color: like ? 'red' : 'black',
+                    }}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Ionic
+                    name="ios-chatbubble-outline"
+                    style={{fontSize: 20, paddingRight: 10}}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Ionic name="ios-navigate-outline" style={{fontSize: 20}} />
+                </TouchableOpacity>
+*/
+
+/*
+         <View
               style={{
                 flexDirection: 'row',
                 justifyContent: 'center',
@@ -270,114 +405,64 @@ const Post = ({ postInfo }) => {
                 </TouchableOpacity>
               </View>
             </View>
-            <View style={{ paddingHorizontal: 15 }}>
-              <Text>
-                {percentLeft ? (
-                  <>
-                    {' '}
-                    <Text>
-                      left:{' '}
-                      {((data.LeftVoteCount + 1) /
-                        (data.LeftVoteCount + data.RightVoteCount + 1)) *
-                        100}
-                    </Text>
-                    <Text>
-                      right:{' '}
-                      {100 -
-                        ((data.LeftVoteCount + 1) /
-                          (data.LeftVoteCount + data.RightVoteCount + 1)) *
-                        100}
-                    </Text>
-                  </>
-                ) : (
-                  ''
-                )}
 
-                {percentRight ? (
-                  <>
-                    {' '}
-                    <Text>
-                      left:{' '}
-                      {100 -
-                        ((data.RightVoteCount + 1) /
-                          (data.LeftVoteCount + data.RightVoteCount + 1)) *
-                        100}
-                    </Text>
-                    <Text>
-                      right:{' '}
-                      {((data.RightVoteCount + 1) /
-                        (data.LeftVoteCount + data.RightVoteCount + 1)) *
-                        100}
-                    </Text>
-                  </>
-                ) : (
-                  ''
-                )}
+*/
+/*
+<View
+        style={{
+          position: 'absolute',
+          zIndex: 1,
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'rgba(52,52,52,0.8)',
+        }}>
+        <StatusBar backgroundColor="#525252" barStyle="dark-content" />
+        <View
+          style={{
+            position: 'absolute',
+            top: windoeHeight / 6,
+            left: windowWidth / 18,
+            backgroundColor: 'white',
+            width: '90%',
+            height: 465,
+            borderRadius: 15,
+            zIndex: 1,
+            elevation: 50,
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              paddingVertical: 10,
+              paddingHorizontal: 15,
+            }}>
+            <Image
+              source={{uri: data.medias[0]}}
+              resizeMode="contain"
+              style={{width: 200, height: 400}}
+            />
+            <View style={{paddingLeft: 8}}>
+              <Text style={{fontSize: 12, fontWeight: '600'}}>
+                the_anonymous_guy
               </Text>
-              <Text style={{ opacity: 0.4, paddingVertical: 2 }}>
-                View all comments
-              </Text>
-              <View
-                style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Image
-                    source={{ uri: data.userPicture[0] }}
-                    style={{
-                      width: 25,
-                      height: 25,
-                      borderRadius: 100,
-                      backgroundColor: 'orange',
-                      marginRight: 10,
-                    }}
-                  />
-                  <TextInput
-                    placeholder="Add a comment "
-                    style={{ opacity: 0.5 }}
-                  />
-                </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <Entypo
-                    name="emoji-happy"
-                    style={{ fontSize: 15, color: 'lightgreen', marginRight: 10 }}
-                  />
-                  <Entypo
-                    name="emoji-neutral"
-                    style={{ fontSize: 15, color: 'pink', marginRight: 10 }}
-                  />
-                  <Entypo
-                    name="emoji-sad"
-                    style={{ fontSize: 15, color: 'red' }}
-                  />
-                </View>
-              </View>
             </View>
           </View>
-        );
-      })}
-    </View>
-  );
-};
+          <Image
+            source={{uri: data.medias[0]}}
+            style={{width: '100%', height: '80%'}}
+          />
+          <View
+            style={{
+              justifyContent: 'space-around',
+              width: '100%',
+              flexDirection: 'row',
+              alignItems: 'center',
+              padding: 8,
+            }}>
+            <Ionic name="ios-heart-outline" style={{fontSize: 26}} />
+            <Ionic name="ios-person-circle-outline" style={{fontSize: 26}} />
+          </View>
+        </View>
+      </View>
 
-export default Post;
-
-/*
- <TouchableOpacity onPress={() => setLike(!like)}>
-                  <Ionic
-                    name={like ? 'ios-heart' : 'ios-heart-outline'}
-                    style={{
-                      fontSize: 20,
-                      paddingRight: 10,
-                      color: like ? 'red' : 'black',
-                    }}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Ionic
-                    name="ios-chatbubble-outline"
-                    style={{fontSize: 20, paddingRight: 10}}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Ionic name="ios-navigate-outline" style={{fontSize: 20}} />
-                </TouchableOpacity>
 */
