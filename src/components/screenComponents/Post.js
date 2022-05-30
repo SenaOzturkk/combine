@@ -182,10 +182,6 @@ const Post = ({ postInfo }) => {
           />
         </>
       );
-    } else {
-      return (
-        <Image source={data.postImage0} style={{ width: '100%', height: 400 }} />
-      );
     }
   };
 
