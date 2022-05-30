@@ -21,7 +21,6 @@ const Home = () => {
 
   const fetchData = () => {
     fetch(baseURL + 'post')
-
       .then(function (response) {
         return response.json();
       })
@@ -72,7 +71,7 @@ const Home = () => {
         />
       </View>
 
-      <ScrollView>
+      <View>
         {loading ? <></> : <Post postInfo={postInfos} />}
         <View
           style={{ justifyContent: 'center', alignItems: 'center', padding: 50 }}>
@@ -81,7 +80,7 @@ const Home = () => {
             style={{ fontSize: 60, opacity: 0.2 }}
           />
         </View>
-      </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };
