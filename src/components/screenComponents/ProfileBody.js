@@ -58,8 +58,14 @@ export const ProfileBody = ({
 export const ProfileButtons = ({id, name, accountName, profileImage}) => {
   const navigation = useNavigation();
   const [follow, setFollow] = useState(follow);
-  const onSendPressed = () => {
-    console.warn('onSendPressed');
+  const onSendVotes = () => {
+    navigation.navigate('Votes');
+  };
+  const onSendAskedQuestion = () => {
+    navigation.navigate('Votes');
+  };
+
+  const onSendMyPosts = () => {
     navigation.navigate('Votes');
   };
 
@@ -87,7 +93,7 @@ export const ProfileButtons = ({id, name, accountName, profileImage}) => {
           />
 
           <CustomButton
-            onPress={onSendPressed}
+            onPress={onSendVotes}
             text="Votes"
             //fgColor="white"
             //bgColor="#827397"
@@ -95,12 +101,7 @@ export const ProfileButtons = ({id, name, accountName, profileImage}) => {
           />
 
           <CustomButton
-            onPress={() =>
-              navigation.push('AskedQuestion', {
-                name: name,
-                accountName: accountName,
-              })
-            }
+            onPress={onSendAskedQuestion}
             text="Asked Question"
             //  bgColor="#4D4C7D"
             // fgColor="white"
@@ -108,7 +109,7 @@ export const ProfileButtons = ({id, name, accountName, profileImage}) => {
           />
 
           <CustomButton
-            onPress={() => navigation.push('MyPosts')}
+            onPress={onSendMyPosts}
             text="My Posts"
             // bgColor="#363062"
             //fgColor="white"

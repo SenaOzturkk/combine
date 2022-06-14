@@ -20,7 +20,8 @@ import PostDetail from './src/components/screenComponents/PostDetail';
 import Votes from './src/components/screenComponents/Votes';
 import InitialScreen from './src/components/screens/InitialScreen';
 import Post from './src/components/screenComponents/Post';
-
+import MyPosts from './src/components/screenComponents/MyPosts';
+import AskedQuestion from './src/components/screenComponents/AskedQuestion';
 const App = () => {
   const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
@@ -80,6 +81,8 @@ const App = () => {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="PostDetail" component={PostDetail} />
         <Stack.Screen name="Votes" component={Votes} />
+        <Stack.Screen name="MyPosts" component={MyPosts} />
+        <Stack.Screen name="AskedQuestion" component={AskedQuestion} />
       </Stack.Navigator>
     </NavigationContainer>
   );
