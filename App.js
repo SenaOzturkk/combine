@@ -1,7 +1,7 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './src/components/screens/Home';
 import Login from './src/components/screens/Login';
 import Register from './src/components/screens/Register';
@@ -16,7 +16,10 @@ import Ionic from 'react-native-vector-icons/Ionicons';
 import Status from './src/components/screenComponents/Status';
 import FriendProfile from './src/components/screenComponents/FriendProfile';
 import EditProfile from './src/components/screenComponents/EditProfile';
+import PostDetail from './src/components/screenComponents/PostDetail';
+import Votes from './src/components/screenComponents/Votes';
 import InitialScreen from './src/components/screens/InitialScreen';
+import Post from './src/components/screenComponents/Post';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -24,7 +27,7 @@ const App = () => {
   const BottomTabScreen = () => {
     return (
       <Tab.Navigator
-        screenOptions={({ route }) => ({
+        screenOptions={({route}) => ({
           tabBarHideOnKeyboard: true,
           tabBarShowLabel: false,
           headerShown: false,
@@ -32,13 +35,15 @@ const App = () => {
             height: 50,
           },
 
-          tabBarIcon: ({ focused, size, colour }) => {
+          tabBarIcon: ({focused, size, colour}) => {
             let iconName;
             if (route.name === 'Home') {
               iconName = focused ? 'home-sharp' : 'home-outline';
               size = focused ? size + 8 : size + 2;
-            } else if (route.name === 'Search') {
-              iconName = focused ? 'search' : 'ios-search-outline';
+            } else if (route.name === 'Activity') {
+              iconName = focused
+                ? 'ios-notifications-sharp'
+                : 'ios-notifications-outline';
             } else if (route.name === 'Profile') {
               iconName = focused ? 'ios-person-circle' : 'ios-person-outline';
             } else if (route.name === 'Upload') {
@@ -51,9 +56,9 @@ const App = () => {
           },
         })}>
         <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="Search" component={Search} />
-        <Tab.Screen name="Upload" component={Upload} />
         <Tab.Screen name="Category" component={Category} />
+        <Tab.Screen name="Upload" component={Upload} />
+        <Tab.Screen name="Activity" component={Activity} />
         <Tab.Screen name="Profile" component={Profile} />
       </Tab.Navigator>
     );
@@ -73,6 +78,8 @@ const App = () => {
         <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
         <Stack.Screen name="NewPassword" component={NewPassword} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="PostDetail" component={PostDetail} />
+        <Stack.Screen name="Votes" component={Votes} />
       </Stack.Navigator>
     </NavigationContainer>
   );

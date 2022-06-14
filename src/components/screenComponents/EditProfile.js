@@ -47,29 +47,12 @@ const EditProfile = ({route, navigation}) => {
         />
         <Text
           style={{
-            color: '#3493D9',
+            color: 'black',
           }}>
           Change profile photo
         </Text>
       </View>
       <View style={{padding: 10}}>
-        <View>
-          <Text
-            style={{
-              opacity: 0.5,
-            }}>
-            Name
-          </Text>
-          <TextInput
-            placeholder="name"
-            defaultValue={name}
-            style={{
-              fontSize: 16,
-              borderBottomWidth: 1,
-              borderColor: '#CDCDCD',
-            }}
-          />
-        </View>
         <View style={{paddingVertical: 10}}>
           <Text
             style={{
@@ -87,50 +70,6 @@ const EditProfile = ({route, navigation}) => {
             }}
           />
         </View>
-        <View style={{paddingVertical: 10}}>
-          <TextInput
-            placeholder="Website"
-            style={{
-              fontSize: 16,
-              borderBottomWidth: 1,
-              borderColor: '#CDCDCD',
-            }}
-          />
-        </View>
-        <View style={{paddingVertical: 10}}>
-          <TextInput
-            placeholder="Bio"
-            style={{
-              fontSize: 16,
-              borderBottomWidth: 1,
-              borderColor: '#CDCDCD',
-            }}
-          />
-        </View>
-      </View>
-      <View>
-        <Text
-          style={{
-            marginVertical: 10,
-            padding: 10,
-            color: '#3493D9',
-            borderTopWidth: 1,
-            borderBottomWidth: 1,
-            borderColor: '#EFEFEF',
-          }}>
-          Switch to Professional account
-        </Text>
-        <Text
-          style={{
-            marginVertical: 10,
-            padding: 10,
-            color: '#3493D9',
-            borderTopWidth: 1,
-            borderBottomWidth: 1,
-            borderColor: '#EFEFEF',
-          }}>
-          Persnol information setting
-        </Text>
       </View>
     </View>
   );

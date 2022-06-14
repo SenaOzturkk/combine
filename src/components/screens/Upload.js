@@ -4,12 +4,14 @@ import DropdownComponent from '../screenComponents/DropdownComponent';
 import CustomInput from '../screenComponents/CustomInput';
 import CustomButton from '../screenComponents/CustomButton';
 import Ionic from 'react-native-vector-icons/Ionicons';
+import {useNavigation} from '@react-navigation/native';
 
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 const Upload = () => {
   const [detail, setDetail] = useState('');
   const [question, setQuestion] = useState('');
   const [imageUri, setImageUri] = useState('');
+  const navigation = useNavigation();
 
   const dataCategory = [
     {label: 'Giyim', value: 'Giyim'},
@@ -27,6 +29,10 @@ const Upload = () => {
   const onSendPressed = () => {
     console.warn('post send');
   };
+  const onDetailPressed = () => {
+    navigation.navigate('PostDetail');
+  };
+
   const openCamera = () => {
     let options = {
       /* storageOptions: {
@@ -104,16 +110,16 @@ const Upload = () => {
           <CustomButton
             text="Open Camera"
             onPress={openCamera}
-            bgColor="#FAE9EA"
-            fgColor="#DD4D44"
+            bgColor="black"
+            fgColor="white"
             type="SQUARE"
           />
 
           <CustomButton
             text="Open Gallery"
             onPress={openGallery}
-            bgColor="#FAE9EA"
-            fgColor="#DD4D44"
+            bgColor="black"
+            fgColor="white"
             type="SQUARE"
           />
         </View>
@@ -128,6 +134,7 @@ const Upload = () => {
             value={detail}
             setValue={setDetail}
           />
+          <CustomButton text="Detay" onPress={onDetailPressed} />
           <CustomButton text="Gönder" onPress={onSendPressed} />
         </View>
       </View>

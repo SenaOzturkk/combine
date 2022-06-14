@@ -33,6 +33,13 @@ const styles = StyleSheet.create({
   },
   container_PRIMARY: {
     backgroundColor: 'black',
+    width: '55%',
+  },
+  container_PROFILE: {
+    width: '100%',
+    height: 60,
+    paddingTop: 18,
+    backgroundColor: 'black',
   },
   container_SQUARE: {
     width: 150,

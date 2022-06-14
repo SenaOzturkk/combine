@@ -1,9 +1,9 @@
-import { View, Text, Image, ScrollView } from 'react-native';
-import React, { useState } from 'react';
+import {View, Text, Image, ScrollView} from 'react-native';
+import React, {useState} from 'react';
 import ChoiceLogo from '../../storage/images/choiceLogo.png';
 import CustomInput from '../screenComponents/CustomInput';
 import CustomButton from '../screenComponents/CustomButton';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
@@ -23,12 +23,12 @@ const Login = () => {
       headers: {},
       data: {
         email: username,
-        password: password
-      }
+        password: password,
+      },
     });
-    console.log(response.data)
-    await AsyncStorage.setItem('USER', response.data.userID)
-    navigation.navigate('Bottom')
+    console.log(response.data);
+    await AsyncStorage.setItem('USER', response.data.userID);
+    navigation.navigate('Bottom');
   };
 
   const onForgotPasswordPressed = () => {
@@ -37,14 +37,13 @@ const Login = () => {
   };
 
   const onSignInFacebook = async () => {
-    const x = await AsyncStorage.getItem('USER')
-    console.log(x)
-
+    const x = await AsyncStorage.getItem('USER');
+    console.log(x);
   };
 
   const onSignInGoogle = async () => {
     console.warn('google');
-    await AsyncStorage.setItem('USER', '61881d3780c9116915159b1b')
+    await AsyncStorage.setItem('USER', '61881d3780c9116915159b1b');
   };
 
   const onSignUpdPressed = () => {

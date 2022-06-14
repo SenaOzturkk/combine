@@ -38,7 +38,7 @@ const Category = () => {
           resizeMode="contain"
         />
         <SearchBox />
-        <Text style={styles.text}>KATEGORİLER</Text>
+        <Text style={styles.text}>Kategorileri Keşfet</Text>
 
         <View
           style={{
