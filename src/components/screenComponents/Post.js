@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -9,10 +9,13 @@ import {
   ScrollView,
 } from 'react-native';
 import Ionic from 'react-native-vector-icons/Ionicons';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import DropdownComponent from '../screenComponents/DropdownComponent';
+import baseURL from '../baseURL';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
-const Post = ({postInfo}) => {
+const Post = ({ postInfo }) => {
   const windowWidth = Dimensions.get('window').width;
   const windoeHeight = Dimensions.get('window').height;
   const [image, setImage] = useState(null);
@@ -20,21 +23,44 @@ const Post = ({postInfo}) => {
   const [username, setUsername] = useState(null);
   const navigation = useNavigation();
 
+  const sendVote = async (postId, uid, postIndex) => {
+    var data = {
+      uid: uid,
+      postIndex: postIndex,
+      postId: postId
+    };
+
+    var config = {
+      method: 'post',
+      url: baseURL + 'post/vote',
+      headers: {},
+      data: data
+    };
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   const dataCategory = [
-    {label: 'Giyim', value: 'Giyim'},
-    {label: 'Teknoloji', value: 'Teknoloji'},
-    {label: 'Araba', value: 'Araba'},
-    {label: 'Eşya', value: 'Eşya'},
-    {label: 'Hediye', value: 'Hediye'},
-    {label: 'Tatil', value: 'Tatil'},
+    { label: 'Giyim', value: 'Giyim' },
+    { label: 'Teknoloji', value: 'Teknoloji' },
+    { label: 'Araba', value: 'Araba' },
+    { label: 'Eşya', value: 'Eşya' },
+    { label: 'Hediye', value: 'Hediye' },
+    { label: 'Tatil', value: 'Tatil' },
   ];
 
   const askQuestion = () => {
     console.warn(' ask ques');
     navigation.navigate('Question');
   };
-  const onPressActivity = data => {
-    //console.warn(' press');
+  const onPressActivity = async (data, index) => {
+    const uid = await AsyncStorage.getItem('USER');
+    sendVote(data._id, uid, index)
   };
   const onPressOutActivity = data => {
     //console.warn(' press out');
@@ -44,7 +70,7 @@ const Post = ({postInfo}) => {
   };
   const onLongPressActivity = (data, pp, username) => {
     //console.warn('long press');
-    // setImage(data);
+    setImage(data);
     setPpImage(pp);
     setUsername(username);
   };
@@ -53,19 +79,19 @@ const Post = ({postInfo}) => {
     if (data.mediaCount === 1) {
       return (
         <TouchableOpacity
-          //onPress={() => onPressActivity(data)}
+          onPress={() => onPressActivity(data, 0)}
           onPressOut={() => onPressOutActivity(data)}
-          onPressIn={() => {
+          onLongPress={() => {
             onLongPressActivity(
               data.medias[0],
               data.userPicture[0],
               data.userdetails[0].username,
             );
           }}
-          style={{width: '100%', height: 400}}>
+          style={{ width: '100%', height: 400 }}>
           <Image
-            source={{uri: data.medias[0]}}
-            style={{width: '100%', height: 400}}
+            source={{ uri: data.medias[0] }}
+            style={{ width: '100%', height: 400 }}
             resizeMode="contain"
           />
         </TouchableOpacity>
@@ -74,38 +100,40 @@ const Post = ({postInfo}) => {
       return (
         <>
           <TouchableOpacity
-            style={{width: 200, height: 400}}
-            //onPress={() => onPressActivity(data)}
-            onPressOut={() => onPressOutActivity(data)}
-            onPressIn={() => {
+            style={{ width: 200, height: 400 }}
+            onPress={() => onPressActivity(data, 0)}
+            onLongPress={() => {
               onLongPressActivity(
                 data.medias[0],
                 data.userPicture[0],
                 data.userdetails[0].username,
               );
-            }}>
+            }}
+            onPressOut={() => onPressOutActivity(data)}
+          >
             <Image
-              source={{uri: data.medias[0]}}
+              source={{ uri: data.medias[0] }}
               resizeMode="contain"
-              style={{width: 200, height: 400}}
+              style={{ width: 200, height: 400 }}
             />
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={{width: 200, height: 400}}
-            //onPress={() => onPressActivity(data)}
+            style={{ width: 200, height: 400 }}
+            onPress={() => onPressActivity(data, 1)}
             onPressOut={() => onPressOutActivity(data)}
-            onPressIn={() => {
+            onLongPress={() => {
               onLongPressActivity(
                 data.medias[1],
                 data.userPicture[0],
                 data.userdetails[0].username,
               );
-            }}>
+            }}
+          >
             <Image
-              source={{uri: data.medias[1]}}
+              source={{ uri: data.medias[1] }}
               resizeMode="contain"
-              style={{width: 200, height: 400}}
+              style={{ width: 200, height: 400 }}
             />
           </TouchableOpacity>
         </>
@@ -113,17 +141,17 @@ const Post = ({postInfo}) => {
     } else if (data.mediaCount === 3) {
       return (
         <>
-          <View style={{flexDirection: 'row'}}>
-            <View style={{flexDirection: 'column'}}>
+          <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'column' }}>
               <TouchableOpacity
                 style={{
                   flex: 1,
                   width: 200,
                   height: 200,
                 }}
-                //onPress={() => onPressActivity(data)}
+                onPress={() => onPressActivity(data, 0)}
                 onPressOut={() => onPressOutActivity(data)}
-                onPressIn={() => {
+                onLongPress={() => {
                   onLongPressActivity(
                     data.medias[0],
                     data.userPicture[0],
@@ -136,7 +164,7 @@ const Post = ({postInfo}) => {
                     width: 200,
                     height: 200,
                   }}
-                  source={{uri: data.medias[0]}}
+                  source={{ uri: data.medias[0] }}
                 />
               </TouchableOpacity>
 
@@ -147,8 +175,8 @@ const Post = ({postInfo}) => {
                   height: 200,
                 }}
                 onPressOut={() => onPressOutActivity(data)}
-                // onPress={() => onPressActivity(data)}
-                onPressIn={() => {
+                onPress={() => onPressActivity(data, 1)}
+                onLongPress={() => {
                   onLongPressActivity(
                     data.medias[1],
                     data.userPicture[0],
@@ -161,11 +189,11 @@ const Post = ({postInfo}) => {
                     width: 200,
                     height: 200,
                   }}
-                  source={{uri: data.medias[1]}}
+                  source={{ uri: data.medias[1] }}
                 />
               </TouchableOpacity>
             </View>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{ flexDirection: 'row' }}>
               <TouchableOpacity
                 style={{
                   flexDirection: 'row',
@@ -173,8 +201,8 @@ const Post = ({postInfo}) => {
                   height: 400,
                 }}
                 onPressOut={() => onPressOutActivity(data)}
-                //onPress={() => onPressActivity(data)}
-                onPressIn={() => {
+                onPress={() => onPressActivity(data, 2)}
+                onLongPress={() => {
                   onLongPressActivity(
                     data.medias[2],
                     data.userPicture[0],
@@ -187,7 +215,7 @@ const Post = ({postInfo}) => {
                     width: 200,
                     height: 400,
                   }}
-                  source={{uri: data.medias[2]}}
+                  source={{ uri: data.medias[2] }}
                 />
               </TouchableOpacity>
             </View>
@@ -197,17 +225,17 @@ const Post = ({postInfo}) => {
     } else if (data.mediaCount === 4) {
       return (
         <>
-          <View style={{flexDirection: 'row'}}>
-            <View style={{flexDirection: 'column'}}>
+          <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'column' }}>
               <TouchableOpacity
                 style={{
                   flex: 1,
                   width: 200,
                   height: 200,
                 }}
-                //onPress={() => onPressActivity(data)}
+                onPress={() => onPressActivity(data, 0)}
                 onPressOut={() => onPressOutActivity(data)}
-                onPressIn={() => {
+                onLongPress={() => {
                   onLongPressActivity(
                     data.medias[0],
                     data.userPicture[0],
@@ -220,7 +248,7 @@ const Post = ({postInfo}) => {
                     width: 200,
                     height: 200,
                   }}
-                  source={{uri: data.medias[0]}}
+                  source={{ uri: data.medias[0] }}
                 />
               </TouchableOpacity>
 
@@ -231,8 +259,8 @@ const Post = ({postInfo}) => {
                   height: 200,
                 }}
                 onPressOut={() => onPressOutActivity(data)}
-                // onPress={() => onPressActivity(data)}
-                onPressIn={() => {
+                onPress={() => onPressActivity(data, 1)}
+                onLongPress={() => {
                   onLongPressActivity(
                     data.medias[1],
                     data.userPicture[0],
@@ -245,21 +273,21 @@ const Post = ({postInfo}) => {
                     width: 200,
                     height: 200,
                   }}
-                  source={{uri: data.medias[1]}}
+                  source={{ uri: data.medias[1] }}
                 />
               </TouchableOpacity>
             </View>
-            <View style={{flexDirection: 'row'}}>
-              <View style={{flexDirection: 'column'}}>
+            <View style={{ flexDirection: 'row' }}>
+              <View style={{ flexDirection: 'column' }}>
                 <TouchableOpacity
                   style={{
                     flex: 1,
                     width: 200,
                     height: 200,
                   }}
-                  //onPress={() => onPressActivity(data)}
+                  onPress={() => onPressActivity(data, 2)}
                   onPressOut={() => onPressOutActivity(data)}
-                  onPressIn={() => {
+                  onLongPress={() => {
                     onLongPressActivity(
                       data.medias[2],
                       data.userPicture[0],
@@ -272,7 +300,7 @@ const Post = ({postInfo}) => {
                       width: 200,
                       height: 200,
                     }}
-                    source={{uri: data.medias[2]}}
+                    source={{ uri: data.medias[2] }}
                   />
                 </TouchableOpacity>
 
@@ -283,8 +311,8 @@ const Post = ({postInfo}) => {
                     height: 200,
                   }}
                   onPressOut={() => onPressOutActivity(data)}
-                  // onPress={() => onPressActivity(data)}
-                  onPressIn={() => {
+                  onPress={() => onPressActivity(data, 3)}
+                  onLongPress={() => {
                     onLongPressActivity(
                       data.medias[3],
                       data.userPicture[0],
@@ -297,7 +325,7 @@ const Post = ({postInfo}) => {
                       width: 200,
                       height: 200,
                     }}
-                    source={{uri: data.medias[3]}}
+                    source={{ uri: data.medias[3] }}
                   />
                 </TouchableOpacity>
               </View>
@@ -332,13 +360,13 @@ const Post = ({postInfo}) => {
                   justifyContent: 'space-between',
                   padding: 15,
                 }}>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <Image
-                    source={{uri: data.userPicture[0]}}
-                    style={{width: 40, height: 40, borderRadius: 100}}
+                    source={{ uri: data.userPicture[0] }}
+                    style={{ width: 40, height: 40, borderRadius: 100 }}
                   />
-                  <View style={{paddingLeft: 5}}>
-                    <Text style={{fontSize: 15, fontWeight: 'bold'}}>
+                  <View style={{ paddingLeft: 5 }}>
+                    <Text style={{ fontSize: 15, fontWeight: 'bold' }}>
                       {data.userdetails[0].username}
                     </Text>
                   </View>
@@ -420,22 +448,22 @@ const Post = ({postInfo}) => {
                 paddingHorizontal: 15,
               }}>
               <Image
-                source={{uri: ppimage}}
+                source={{ uri: ppimage }}
                 style={{
                   width: 30,
                   height: 30,
                   borderRadius: 100,
                 }}
               />
-              <View style={{paddingLeft: 8}}>
-                <Text style={{fontSize: 12, fontWeight: '600'}}>
+              <View style={{ paddingLeft: 8 }}>
+                <Text style={{ fontSize: 12, fontWeight: '600' }}>
                   {username}
                 </Text>
               </View>
             </View>
             <Image
-              source={{uri: image}}
-              style={{width: '100%', height: '80%'}}
+              source={{ uri: image }}
+              style={{ width: '100%', height: '80%' }}
             />
             <View
               style={{
@@ -445,8 +473,8 @@ const Post = ({postInfo}) => {
                 alignItems: 'center',
                 padding: 8,
               }}>
-              <Ionic name="ios-heart-outline" style={{fontSize: 26}} />
-              <Ionic name="ios-person-circle-outline" style={{fontSize: 26}} />
+              <Ionic name="ios-heart-outline" style={{ fontSize: 26 }} />
+              <Ionic name="ios-person-circle-outline" style={{ fontSize: 26 }} />
             </View>
           </View>
         </View>

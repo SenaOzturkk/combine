@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import SearchBox from '../screenComponents/SearchBox';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import CustomButton from '../screenComponents/CustomButton';
 import ChoiceLogo from '../../storage/images/choiceLogo.png';
 
@@ -48,7 +48,7 @@ const Category = () => {
             justifyContent: 'space-around',
           }}>
           <TouchableOpacity
-          /*onPress={() => navigation.goBack()}*/
+            onPress={() => console.log(2)}
           >
             <Image
               source={require('../../storage/images/ayakkabi.png')}
