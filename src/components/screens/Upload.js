@@ -1,12 +1,20 @@
-import { View, Text, StyleSheet, Button, Image, ScrollView, SafeAreaView } from 'react-native';
-import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  Image,
+  ScrollView,
+  SafeAreaView,
+} from 'react-native';
+import React, {useState} from 'react';
 import DropdownComponent from '../screenComponents/DropdownComponent';
 import CustomInput from '../screenComponents/CustomInput';
 import CustomButton from '../screenComponents/CustomButton';
 import Ionic from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 const Upload = () => {
   const [detail, setDetail] = useState('');
   const [question, setQuestion] = useState('');
@@ -14,17 +22,17 @@ const Upload = () => {
   const navigation = useNavigation();
 
   const dataCategory = [
-    { label: 'Giyim', value: 'Giyim' },
-    { label: 'Teknoloji', value: 'Teknoloji' },
-    { label: 'Araba', value: 'Araba' },
-    { label: 'Eşya', value: 'Eşya' },
-    { label: 'Hediye', value: 'Hediye' },
-    { label: 'Tatil', value: 'Tatil' },
+    {label: 'Giyim', value: 'Giyim'},
+    {label: 'Teknoloji', value: 'Teknoloji'},
+    {label: 'Araba', value: 'Araba'},
+    {label: 'Eşya', value: 'Eşya'},
+    {label: 'Hediye', value: 'Hediye'},
+    {label: 'Tatil', value: 'Tatil'},
   ];
   const dataSablon = [
-    { label: 'Tekli', value: 'Tekli' },
-    { label: 'İkili', value: 'İkili' },
-    { label: 'Çoklu', value: 'Çoklu' },
+    {label: 'Tekli', value: 'Tekli'},
+    {label: 'İkili', value: 'İkili'},
+    {label: 'Çoklu', value: 'Çoklu'},
   ];
   const onSendPressed = () => {
     console.warn('post send');
@@ -139,7 +147,8 @@ const Upload = () => {
             <CustomButton text="Gönder" onPress={onSendPressed} />
           </View>
         </View>
-      </ScrollView></SafeAreaView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({

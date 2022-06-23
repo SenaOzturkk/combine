@@ -62,6 +62,10 @@ const styles = StyleSheet.create({
   container_TERTIARY_CENTER: {
     backgroundColor: 'white',
   },
+  container_QUESTION: {
+    width: 80,
+    height: 50,
+  },
   text: {
     color: 'white',
     fontWeight: '400',

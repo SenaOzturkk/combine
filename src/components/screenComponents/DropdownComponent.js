@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 8,
-    width: 350,
+    width: 250,
+    //350ydi
   },
   icon: {
     marginRight: 5,
