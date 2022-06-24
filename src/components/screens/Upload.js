@@ -138,12 +138,11 @@ const Upload = () => {
               value={question}
               setValue={setQuestion}
             />
-            <CustomInput
-              placeholder="Detay giriniz"
-              value={detail}
-              setValue={setDetail}
+
+            <CustomButton
+              text="Ürünlere detay girmek için tıklayınız"
+              onPress={onDetailPressed}
             />
-            <CustomButton text="Detay" onPress={onDetailPressed} />
             <CustomButton text="Gönder" onPress={onSendPressed} />
           </View>
         </View>

@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   container_QUESTION: {
-    width: 80,
+    width: 120,
     height: 50,
   },
   text: {

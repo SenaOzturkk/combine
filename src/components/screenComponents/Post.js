@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -9,19 +9,24 @@ import {
   ScrollView,
 } from 'react-native';
 import Ionic from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import DropdownComponent from '../screenComponents/DropdownComponent';
 import baseURL from '../baseURL';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import CustomButton from './CustomButton';
 
-const Post = ({ postInfo }) => {
+const Post = ({postInfo}) => {
   const windowWidth = Dimensions.get('window').width;
   const windoeHeight = Dimensions.get('window').height;
   const [image, setImage] = useState(null);
   const [ppimage, setPpImage] = useState(null);
   const [username, setUsername] = useState(null);
+  const [postDetail, setPostDetail] = useState([]);
+  const [postMarka, setPostMarka] = useState(null);
+  const [postBeden, setBeden] = useState(null);
+  const [postLink, setLink] = useState(null);
+  const [postAciklama, setAciklama] = useState(null);
   let [indexPost, setIndexPost] = useState(null);
 
   const [dictionary, setDictionary] = useState({});
@@ -47,7 +52,6 @@ const Post = ({ postInfo }) => {
         for (var i in response.data.votes) {
           sumVotes += response.data.votes[i];
         }
-
 
         let calculatePercent = 0;
         if (response.data.mediaCount == 1) {
@@ -79,11 +83,13 @@ const Post = ({ postInfo }) => {
           }
         }
         if (dictionary[response.data._id] == undefined) {
-          dictionary[response.data._id] = { [postIndex]: calculatePercent.toFixed(2) }
+          dictionary[response.data._id] = {
+            [postIndex]: calculatePercent.toFixed(2),
+          };
         } else {
-          var a = dictionary[response.data._id]
-          a[postIndex] = calculatePercent.toFixed(2)
-          dictionary[response.data._id] = a
+          var a = dictionary[response.data._id];
+          a[postIndex] = calculatePercent.toFixed(2);
+          dictionary[response.data._id] = a;
         }
 
         setDictionary(dictionary);
@@ -94,78 +100,78 @@ const Post = ({ postInfo }) => {
   };
 
   const categoryAyakkabi = [
-    { label: 'Markası', value: 'Markası' },
-    { label: 'Ayakkabı Numarası', value: 'Ayakkabı Numarası' },
-    { label: 'Rengi', value: 'Rengi' },
-    { label: 'Ürünün Kodu', value: 'Ürünün Kodu' },
-    { label: 'Fiyatı', value: 'Fiyatı' },
-    { label: 'Linki', value: 'Link' },
+    {label: 'Markası', value: 'Markası'},
+    {label: 'Ayakkabı Numarası', value: 'Ayakkabı Numarası'},
+    {label: 'Rengi', value: 'Rengi'},
+    {label: 'Ürünün Kodu', value: 'Ürünün Kodu'},
+    {label: 'Fiyatı', value: 'Fiyatı'},
+    {label: 'Linki', value: 'Link'},
   ];
   const categoryGiyim = [
-    { label: 'Markası', value: 'Markası' },
-    { label: 'Bedeni', value: 'Bedeni' },
-    { label: 'Rengi', value: 'Rengi' },
-    { label: 'Ürünün Kodu', value: 'Ürünün Kodu' },
-    { label: 'Fiyatı', value: 'Fiyatı' },
-    { label: 'Linki', value: 'Link' },
+    {label: 'Markası', value: 'Markası'},
+    {label: 'Bedeni', value: 'Bedeni'},
+    {label: 'Rengi', value: 'Rengi'},
+    {label: 'Ürünün Kodu', value: 'Ürünün Kodu'},
+    {label: 'Fiyatı', value: 'Fiyatı'},
+    {label: 'Linki', value: 'Link'},
   ];
 
   const categoryAksesuar = [
-    { label: 'Markası', value: 'Markası' },
-    { label: 'Model', value: 'Model' },
-    { label: 'Özellikleri', value: 'Özellikleri' },
-    { label: 'Rengi', value: 'Rengi' },
-    { label: 'Ürünün Kodu', value: 'Ürünün Kodu' },
-    { label: 'Fiyatı', value: 'Fiyatı' },
-    { label: 'Linki', value: 'Link' },
+    {label: 'Markası', value: 'Markası'},
+    {label: 'Model', value: 'Model'},
+    {label: 'Özellikleri', value: 'Özellikleri'},
+    {label: 'Rengi', value: 'Rengi'},
+    {label: 'Ürünün Kodu', value: 'Ürünün Kodu'},
+    {label: 'Fiyatı', value: 'Fiyatı'},
+    {label: 'Linki', value: 'Link'},
   ];
   const categoryKombin = [
-    { label: 'Markası', value: 'Markası' },
-    { label: 'Model', value: 'Model' },
-    { label: 'Fiyatı', value: 'Fiyatı' },
-    { label: 'Linki', value: 'Link' },
+    {label: 'Markası', value: 'Markası'},
+    {label: 'Model', value: 'Model'},
+    {label: 'Fiyatı', value: 'Fiyatı'},
+    {label: 'Linki', value: 'Link'},
   ];
   const categoryHediye = [
-    { label: 'Markası', value: 'Markası' },
-    { label: 'Model', value: 'Model' },
-    { label: 'Özellikleri', value: 'Özellikleri' },
-    { label: 'Ürünün Kodu', value: 'Ürünün Kodu' },
-    { label: 'Fiyatı', value: 'Fiyatı' },
-    { label: 'Linki', value: 'Link' },
+    {label: 'Markası', value: 'Markası'},
+    {label: 'Model', value: 'Model'},
+    {label: 'Özellikleri', value: 'Özellikleri'},
+    {label: 'Ürünün Kodu', value: 'Ürünün Kodu'},
+    {label: 'Fiyatı', value: 'Fiyatı'},
+    {label: 'Linki', value: 'Link'},
   ];
   const categoryTatil = [
-    { label: 'Ülke/Şehir', value: 'Şehir' },
-    { label: 'Otel Adı', value: 'Otel' },
-    { label: 'İmkanlar', value: 'İmkanlar' },
-    { label: 'Gecelik Fiyatı', value: 'Gecelik Fiyatı' },
-    { label: 'Linki', value: 'Link' },
+    {label: 'Ülke/Şehir', value: 'Şehir'},
+    {label: 'Otel Adı', value: 'Otel'},
+    {label: 'İmkanlar', value: 'İmkanlar'},
+    {label: 'Gecelik Fiyatı', value: 'Gecelik Fiyatı'},
+    {label: 'Linki', value: 'Link'},
   ];
   const categoryVasita = [
-    { label: 'Markası', value: 'Markası' },
-    { label: 'Model', value: 'Model' },
-    { label: 'Rengi', value: 'Rengi' },
-    { label: 'Km', value: 'Km' },
-    { label: 'Yıl', value: 'Yıl' },
-    { label: 'Yakıt Türü', value: 'Yakıt Türü' },
-    { label: 'Fiyatı', value: 'Fiyatı' },
-    { label: 'Linki', value: 'Link' },
+    {label: 'Markası', value: 'Markası'},
+    {label: 'Model', value: 'Model'},
+    {label: 'Rengi', value: 'Rengi'},
+    {label: 'Km', value: 'Km'},
+    {label: 'Yıl', value: 'Yıl'},
+    {label: 'Yakıt Türü', value: 'Yakıt Türü'},
+    {label: 'Fiyatı', value: 'Fiyatı'},
+    {label: 'Linki', value: 'Link'},
   ];
   const categoryTeknoloji = [
-    { label: 'Markası', value: 'Markası' },
-    { label: 'Model', value: 'Model' },
-    { label: 'Özellikleri', value: 'Özellikleri' },
-    { label: 'Rengi', value: 'Rengi' },
-    { label: 'Ürünün Kodu', value: 'Ürünün Kodu' },
-    { label: 'Fiyatı', value: 'Fiyatı' },
-    { label: 'Linki', value: 'Link' },
+    {label: 'Markası', value: 'Markası'},
+    {label: 'Model', value: 'Model'},
+    {label: 'Özellikleri', value: 'Özellikleri'},
+    {label: 'Rengi', value: 'Rengi'},
+    {label: 'Ürünün Kodu', value: 'Ürünün Kodu'},
+    {label: 'Fiyatı', value: 'Fiyatı'},
+    {label: 'Linki', value: 'Link'},
   ];
   const categoryEv = [
-    { label: 'Markası', value: 'Markası' },
-    { label: 'Rengi', value: 'Rengi' },
-    { label: 'Özellikleri', value: 'Özellikleri' },
-    { label: 'Ürünün Kodu', value: 'Ürünün Kodu' },
-    { label: 'Fiyatı', value: 'Fiyatı' },
-    { label: 'Linki', value: 'Link' },
+    {label: 'Markası', value: 'Markası'},
+    {label: 'Rengi', value: 'Rengi'},
+    {label: 'Özellikleri', value: 'Özellikleri'},
+    {label: 'Ürünün Kodu', value: 'Ürünün Kodu'},
+    {label: 'Fiyatı', value: 'Fiyatı'},
+    {label: 'Linki', value: 'Link'},
   ];
 
   const onPressActivity = async (data, index, dictionary) => {
@@ -179,12 +185,21 @@ const Post = ({ postInfo }) => {
     setImage(null);
     setPpImage(null);
     setUsername('null');
+    setPostDetail(null);
   };
-  const onLongPressActivity = (data, pp, username) => {
-    //console.warn('long press');
+  const onLongPressActivity = (data, pp, username, detail) => {
     setImage(data);
     setPpImage(pp);
     setUsername(username);
+    /*  var list = [];
+    for (var i = 0; i < detail.length; i++) {
+      list.push(detail[i]);
+    }
+    setPostDetail(list);*/
+    setPostMarka(detail[0]);
+    setBeden(detail[1]);
+    setLink(detail[2]);
+    setAciklama(detail[3]);
   };
 
   const setPost = (data, dictionary) => {
@@ -198,12 +213,13 @@ const Post = ({ postInfo }) => {
               data.medias[0],
               data.userPicture[0],
               data.userdetails[0].username,
+              data.detail,
             );
           }}
-          style={{ width: '100%', height: 400 }}>
+          style={{width: '100%', height: 400}}>
           <Image
-            source={{ uri: data.medias[0] }}
-            style={{ width: '100%', height: 400 }}
+            source={{uri: data.medias[0]}}
+            style={{width: '100%', height: 400}}
             resizeMode="contain"
           />
         </TouchableOpacity>
@@ -212,25 +228,26 @@ const Post = ({ postInfo }) => {
       return (
         <>
           <TouchableOpacity
-            style={{ width: 200, height: 400 }}
+            style={{width: 200, height: 400}}
             onPress={() => onPressActivity(data, 0, dictionary)}
             onLongPress={() => {
               onLongPressActivity(
                 data.medias[0],
                 data.userPicture[0],
                 data.userdetails[0].username,
+                data.detail,
               );
             }}
             onPressOut={() => onPressOutActivity(data)}>
             <Image
-              source={{ uri: data.medias[0] }}
+              source={{uri: data.medias[0]}}
               resizeMode="contain"
-              style={{ width: 200, height: 400 }}
+              style={{width: 200, height: 400}}
             />
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={{ width: 200, height: 400 }}
+            style={{width: 200, height: 400}}
             onPress={() => onPressActivity(data, 1, dictionary)}
             onPressOut={() => onPressOutActivity(data)}
             onLongPress={() => {
@@ -238,12 +255,13 @@ const Post = ({ postInfo }) => {
                 data.medias[1],
                 data.userPicture[0],
                 data.userdetails[0].username,
+                data.detail,
               );
             }}>
             <Image
-              source={{ uri: data.medias[1] }}
+              source={{uri: data.medias[1]}}
               resizeMode="contain"
-              style={{ width: 200, height: 400 }}
+              style={{width: 200, height: 400}}
             />
           </TouchableOpacity>
         </>
@@ -251,8 +269,8 @@ const Post = ({ postInfo }) => {
     } else if (data.mediaCount === 3) {
       return (
         <>
-          <View style={{ flexDirection: 'row' }}>
-            <View style={{ flexDirection: 'column' }}>
+          <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'column'}}>
               <TouchableOpacity
                 style={{
                   flex: 1,
@@ -266,6 +284,7 @@ const Post = ({ postInfo }) => {
                     data.medias[0],
                     data.userPicture[0],
                     data.userdetails[0].username,
+                    data.detail,
                   );
                 }}>
                 <Image
@@ -274,7 +293,7 @@ const Post = ({ postInfo }) => {
                     width: 200,
                     height: 200,
                   }}
-                  source={{ uri: data.medias[0] }}
+                  source={{uri: data.medias[0]}}
                 />
               </TouchableOpacity>
 
@@ -291,6 +310,7 @@ const Post = ({ postInfo }) => {
                     data.medias[1],
                     data.userPicture[0],
                     data.userdetails[0].username,
+                    data.detail,
                   );
                 }}>
                 <Image
@@ -299,11 +319,11 @@ const Post = ({ postInfo }) => {
                     width: 200,
                     height: 200,
                   }}
-                  source={{ uri: data.medias[1] }}
+                  source={{uri: data.medias[1]}}
                 />
               </TouchableOpacity>
             </View>
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{flexDirection: 'row'}}>
               <TouchableOpacity
                 style={{
                   flexDirection: 'row',
@@ -317,6 +337,7 @@ const Post = ({ postInfo }) => {
                     data.medias[2],
                     data.userPicture[0],
                     data.userdetails[0].username,
+                    data.detail,
                   );
                 }}>
                 <Image
@@ -325,7 +346,7 @@ const Post = ({ postInfo }) => {
                     width: 200,
                     height: 400,
                   }}
-                  source={{ uri: data.medias[2] }}
+                  source={{uri: data.medias[2]}}
                 />
               </TouchableOpacity>
             </View>
@@ -335,8 +356,8 @@ const Post = ({ postInfo }) => {
     } else if (data.mediaCount === 4) {
       return (
         <>
-          <View style={{ flexDirection: 'row' }}>
-            <View style={{ flexDirection: 'column' }}>
+          <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'column'}}>
               <TouchableOpacity
                 style={{
                   flex: 1,
@@ -350,6 +371,7 @@ const Post = ({ postInfo }) => {
                     data.medias[0],
                     data.userPicture[0],
                     data.userdetails[0].username,
+                    data.detail,
                   );
                 }}>
                 <Image
@@ -358,7 +380,7 @@ const Post = ({ postInfo }) => {
                     width: 200,
                     height: 200,
                   }}
-                  source={{ uri: data.medias[0] }}
+                  source={{uri: data.medias[0]}}
                 />
               </TouchableOpacity>
 
@@ -375,6 +397,7 @@ const Post = ({ postInfo }) => {
                     data.medias[1],
                     data.userPicture[0],
                     data.userdetails[0].username,
+                    data.detail,
                   );
                 }}>
                 <Image
@@ -383,12 +406,12 @@ const Post = ({ postInfo }) => {
                     width: 200,
                     height: 200,
                   }}
-                  source={{ uri: data.medias[1] }}
+                  source={{uri: data.medias[1]}}
                 />
               </TouchableOpacity>
             </View>
-            <View style={{ flexDirection: 'row' }}>
-              <View style={{ flexDirection: 'column' }}>
+            <View style={{flexDirection: 'row'}}>
+              <View style={{flexDirection: 'column'}}>
                 <TouchableOpacity
                   style={{
                     flex: 1,
@@ -402,6 +425,7 @@ const Post = ({ postInfo }) => {
                       data.medias[2],
                       data.userPicture[0],
                       data.userdetails[0].username,
+                      data.detail,
                     );
                   }}>
                   <Image
@@ -410,7 +434,7 @@ const Post = ({ postInfo }) => {
                       width: 200,
                       height: 200,
                     }}
-                    source={{ uri: data.medias[2] }}
+                    source={{uri: data.medias[2]}}
                   />
                 </TouchableOpacity>
 
@@ -427,6 +451,7 @@ const Post = ({ postInfo }) => {
                       data.medias[3],
                       data.userPicture[0],
                       data.userdetails[0].username,
+                      data.detail,
                     );
                   }}>
                   <Image
@@ -435,7 +460,7 @@ const Post = ({ postInfo }) => {
                       width: 200,
                       height: 200,
                     }}
-                    source={{ uri: data.medias[3] }}
+                    source={{uri: data.medias[3]}}
                   />
                 </TouchableOpacity>
               </View>
@@ -470,13 +495,13 @@ const Post = ({ postInfo }) => {
                   justifyContent: 'space-between',
                   padding: 15,
                 }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Image
-                    source={{ uri: data.userPicture[0] }}
-                    style={{ width: 40, height: 40, borderRadius: 100 }}
+                    source={{uri: data.userPicture[0]}}
+                    style={{width: 40, height: 40, borderRadius: 100}}
                   />
-                  <View style={{ paddingLeft: 5 }}>
-                    <Text style={{ fontSize: 15, fontWeight: 'bold' }}>
+                  <View style={{paddingLeft: 5}}>
+                    <Text style={{fontSize: 15, fontWeight: 'bold'}}>
                       {data.userdetails[0].username}
                     </Text>
                   </View>
@@ -519,11 +544,10 @@ const Post = ({ postInfo }) => {
                       marginBottom: 30,
                       fontSize: 20,
                     }}>
-                    {/* % {dictionary[(data._id, indexPost)]} */}
-                    %{
-                      dictionary[data._id] ? dictionary[data._id][indexPost] : NaN
-                    }
-                    {console.log(dictionary)}
+                    {/* % {dictionary[(data._id, indexPost)]} */}%
+                    {dictionary[data._id]
+                      ? dictionary[data._id][indexPost]
+                      : NaN}
                   </Text>
                 ) : null}
               </View>
@@ -616,15 +640,12 @@ const Post = ({ postInfo }) => {
                     />
                   ) : null}
                 </View>
-                <View style={{ marginTop: 15 }}>
+                <View style={{marginTop: 15}}>
                   <CustomButton
                     text="Sor"
                     bgColor="black"
                     fgColor="white"
                     type="QUESTION"></CustomButton>
-                </View>
-                <View style={{ marginTop: 30, marginLeft: 5 }}>
-                  <Ionic name="ios-ellipsis-vertical" style={{ fontSize: 30 }} />
                 </View>
               </View>
             </View>
@@ -661,33 +682,113 @@ const Post = ({ postInfo }) => {
                 paddingHorizontal: 15,
               }}>
               <Image
-                source={{ uri: ppimage }}
+                source={{uri: ppimage}}
                 style={{
                   width: 30,
                   height: 30,
                   borderRadius: 100,
                 }}
               />
-              <View style={{ paddingLeft: 8 }}>
-                <Text style={{ fontSize: 12, fontWeight: '600' }}>
+              <View style={{paddingLeft: 8}}>
+                <Text style={{fontSize: 12, fontWeight: '600'}}>
                   {username}
                 </Text>
               </View>
             </View>
-            <Image
-              source={{ uri: image }}
-              style={{ width: '100%', height: '80%' }}
-            />
             <View
               style={{
                 justifyContent: 'space-around',
                 width: '100%',
+                height: '90%',
                 flexDirection: 'row',
                 alignItems: 'center',
                 padding: 8,
               }}>
-              <Ionic name="ios-heart-outline" style={{ fontSize: 26 }} />
-              <Ionic name="ios-person-circle-outline" style={{ fontSize: 26 }} />
+              <Image
+                source={{uri: image}}
+                style={{
+                  width: '50%',
+                  height: '100%',
+                }}
+              />
+              <Text
+                style={{
+                  fontSize: 12,
+                  fontWeight: '600',
+                  width: '50%',
+                  height: '100%',
+                  marginLeft: 10,
+                }}>
+                <View
+                  style={{
+                    borderRadius: 5,
+                    borderWidth: 1,
+                    borderBottomth: 0,
+                    backgroundColor: 'black',
+                  }}>
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      fontWeight: '600',
+                      color: 'white',
+                    }}>
+                    Markası:
+                  </Text>
+                </View>
+                {'  ' + postMarka} {'\n'}
+                <View
+                  style={{
+                    borderRadius: 5,
+                    borderWidth: 1,
+                    borderBottomth: 0,
+                    backgroundColor: 'black',
+                    marginTop: 50,
+                  }}>
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      fontWeight: '600',
+                      color: 'white',
+                    }}>
+                    Bedeni:
+                  </Text>
+                </View>
+                {'  ' + postBeden} {'\n'}
+                <View
+                  style={{
+                    borderRadius: 5,
+                    borderWidth: 1,
+                    borderBottomth: 0,
+                    backgroundColor: 'black',
+                  }}>
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      fontWeight: '600',
+                      color: 'white',
+                    }}>
+                    Linki:
+                  </Text>
+                </View>
+                {'  ' + postLink} {'\n'}
+                <View
+                  style={{
+                    borderRadius: 5,
+                    borderWidth: 1,
+                    borderBottomth: 0,
+                    backgroundColor: 'black',
+                  }}>
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      fontWeight: '600',
+                      color: 'white',
+                    }}>
+                    Açıklama:
+                  </Text>
+                </View>
+                {'  ' + postAciklama} {'\n'}
+              </Text>
             </View>
           </View>
         </View>
@@ -697,117 +798,3 @@ const Post = ({ postInfo }) => {
 };
 
 export default Post;
-
-/*
- <TouchableOpacity onPress={() => setLike(!like)}>
-                  <Ionic
-                    name={like ? 'ios-heart' : 'ios-heart-outline'}
-                    style={{
-                      fontSize: 20,
-                      paddingRight: 10,
-                      color: like ? 'red' : 'black',
-                    }}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Ionic
-                    name="ios-chatbubble-outline"
-                    style={{fontSize: 20, paddingRight: 10}}
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Ionic name="ios-navigate-outline" style={{fontSize: 20}} />
-                </TouchableOpacity>
-*/
-
-/*
-         <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-                paddingHorizontal: 12,
-                paddingVertical: 15,
-              }}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  borderWidth: 2,
-                  width: 300,
-                  height: 50,
-                  borderRadius: 10,
-                  borderColor: 'black',
-                  justifyContent: 'space-between',
-                }}>
-               
-                <FontAwesome
-                  name="percent"
-                  style={{
-                    fontSize: 40,
-                    color: 'black',
-                  }}></FontAwesome>
-              
-              </View>
-            </View>
-
-*/
-/*
-<View
-        style={{
-          position: 'absolute',
-          zIndex: 1,
-          width: '100%',
-          height: '100%',
-          backgroundColor: 'rgba(52,52,52,0.8)',
-        }}>
-        <StatusBar backgroundColor="#525252" barStyle="dark-content" />
-        <View
-          style={{
-            position: 'absolute',
-            top: windoeHeight / 6,
-            left: windowWidth / 18,
-            backgroundColor: 'white',
-            width: '90%',
-            height: 465,
-            borderRadius: 15,
-            zIndex: 1,
-            elevation: 50,
-          }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingVertical: 10,
-              paddingHorizontal: 15,
-            }}>
-            <Image
-              source={{uri: data.medias[0]}}
-              resizeMode="contain"
-              style={{width: 200, height: 400}}
-            />
-            <View style={{paddingLeft: 8}}>
-              <Text style={{fontSize: 12, fontWeight: '600'}}>
-                the_anonymous_guy
-              </Text>
-            </View>
-          </View>
-          <Image
-            source={{uri: data.medias[0]}}
-            style={{width: '100%', height: '80%'}}
-          />
-          <View
-            style={{
-              justifyContent: 'space-around',
-              width: '100%',
-              flexDirection: 'row',
-              alignItems: 'center',
-              padding: 8,
-            }}>
-            <Ionic name="ios-heart-outline" style={{fontSize: 26}} />
-            <Ionic name="ios-person-circle-outline" style={{fontSize: 26}} />
-          </View>
-        </View>
-      </View>
-
-*/
