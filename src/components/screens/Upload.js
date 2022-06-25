@@ -99,7 +99,13 @@ const Upload = () => {
     openCamera();
   };
   return (
-    <SafeAreaView>
+    <SafeAreaView
+      style={{
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'white',
+        position: 'relative',
+      }}>
       <ScrollView showVerticalScrollIndicator={false}>
         <View style={styles.container}>
           <DropdownComponent
@@ -155,6 +161,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     height: 700,
     alignItems: 'center',
+    marginTop: 80,
   },
   bottomContainer: {
     backgroundColor: 'white',
