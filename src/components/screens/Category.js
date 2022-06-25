@@ -7,17 +7,34 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import SearchBox from '../screenComponents/SearchBox';
 import { useNavigation } from '@react-navigation/native';
 import CustomButton from '../screenComponents/CustomButton';
 import ChoiceLogo from '../../storage/images/choiceLogo.png';
+import baseURL from '../baseURL';
+import Ionic from 'react-native-vector-icons/Ionicons';
+import Post from '../screenComponents/Post';
 
 const Category = () => {
   const navigation = useNavigation();
-  const onForgotPasswordPressed = () => {
-    console.warn('forgot password');
-    navigation.navigate('ForgotPassword');
+  const [postInfos, setPostInfos] = useState({})
+  const [loading, setLoading] = useState(true)
+
+  const fetchData = (category) => {
+    fetch(baseURL + 'post?category=' + category)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (json) {
+        console.log(json)
+        setPostInfos(json)
+        setLoading(false)
+      })
+      .catch(function (error) {
+        console.log('There has been a problem with your fetch operation: ' + error.message);
+        throw error;
+      });
   };
   return (
     <SafeAreaView
@@ -48,7 +65,7 @@ const Category = () => {
             justifyContent: 'space-around',
           }}>
           <TouchableOpacity
-            onPress={() => console.log(2)}
+            onPress={() => fetchData('Ayakkabı')}
           >
             <Image
               source={require('../../storage/images/ayakkabi.png')}
@@ -58,7 +75,9 @@ const Category = () => {
               }}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => fetchData('Giyim')}
+          >
             <Image
               source={require('../../storage/images/giyim.png')}
               style={{
@@ -67,7 +86,9 @@ const Category = () => {
               }}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => fetchData('Aksesuar')}
+          >
             <Image
               source={require('../../storage/images/saat.png')}
               style={{
@@ -85,7 +106,9 @@ const Category = () => {
             flexDirection: 'row',
             justifyContent: 'space-around',
           }}>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => fetchData('Kombin')}
+          >
             <Image
               source={require('../../storage/images/kombin.png')}
               style={{
@@ -94,7 +117,9 @@ const Category = () => {
               }}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => fetchData('Hediye')}
+          >
             <Image
               source={require('../../storage/images/hediye.png')}
               style={{
@@ -103,7 +128,9 @@ const Category = () => {
               }}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => fetchData('Tatil')}
+          >
             <Image
               source={require('../../storage/images/tatil.png')}
               style={{
@@ -121,7 +148,9 @@ const Category = () => {
             flexDirection: 'row',
             justifyContent: 'space-around',
           }}>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => fetchData('Vasıta')}
+          >
             <Image
               source={require('../../storage/images/vasıta.png')}
               style={{
@@ -130,7 +159,9 @@ const Category = () => {
               }}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => fetchData('Teknoloji')}
+          >
             <Image
               source={require('../../storage/images/elektronik.png')}
               style={{
@@ -139,7 +170,9 @@ const Category = () => {
               }}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => fetchData('Ev')}
+          >
             <Image
               source={require('../../storage/images/ev.png')}
               style={{
@@ -150,6 +183,9 @@ const Category = () => {
           </TouchableOpacity>
         </View>
       </ScrollView>
+      <View>
+        {loading ? <></> : <Post postInfo={postInfos} isCategory={true} categoryLoading={setLoading} />}
+      </View>
     </SafeAreaView>
   );
 };
