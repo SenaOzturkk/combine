@@ -1,10 +1,10 @@
 import React from 'react';
-import {View, Text, ScrollView, SafeAreaView} from 'react-native';
-import {ProfileBody, ProfileButtons} from '../screenComponents/ProfileBody';
+import { View, Text, ScrollView, SafeAreaView } from 'react-native';
+import { ProfileBody, ProfileButtons } from '../screenComponents/ProfileBody';
 
 import CustomButton from '../screenComponents/CustomButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 const Profile = () => {
   const navigation = useNavigation();
@@ -26,8 +26,8 @@ const Profile = () => {
 
   return (
     <SafeAreaView
-      style={{width: '100%', height: '100%', backgroundColor: 'white'}}>
-      <View style={{width: '100%', padding: 10}}>
+      style={{ width: '100%', height: '100%', backgroundColor: 'white' }}>
+      <View style={{ width: '100%', padding: 10 }}>
         <ProfileBody
           name="aa"
           accountName="djjeneme"

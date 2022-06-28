@@ -481,7 +481,7 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
 
   return (
     <>
-      {isCategory ? <CustomButton text="Kategoriler" onPress={getBackButton} />
+      {isCategory ? <CustomButton text="Geri Dön" onPress={getBackButton} />
         : (<></>)}
       <ScrollView>
         {postInfo.map((data, index) => {
