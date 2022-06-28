@@ -123,7 +123,7 @@ const Upload = () => {
               maxHeight: 200,
             }}>
             <CustomButton
-              text="Open Camera"
+              text="Kamerayı Aç"
               onPress={openCamera}
               bgColor="black"
               fgColor="white"
@@ -131,7 +131,7 @@ const Upload = () => {
             />
 
             <CustomButton
-              text="Open Gallery"
+              text="Galeriyi Aç"
               onPress={openGallery}
               bgColor="black"
               fgColor="white"

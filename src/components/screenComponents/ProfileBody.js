@@ -58,15 +58,13 @@ export const ProfileBody = ({
 export const ProfileButtons = ({id, name, accountName, profileImage}) => {
   const navigation = useNavigation();
   const [follow, setFollow] = useState(follow);
-  const onSendVotes = () => {
-    navigation.navigate('Votes');
-  };
+
   const onSendAskedQuestion = () => {
-    navigation.navigate('Votes');
+    navigation.navigate('AskedQuestion');
   };
 
   const onSendMyPosts = () => {
-    navigation.navigate('Votes');
+    navigation.navigate('MyPosts');
   };
 
   return (
@@ -86,88 +84,27 @@ export const ProfileButtons = ({id, name, accountName, profileImage}) => {
                 profileImage: profileImage,
               })
             }
-            text="Edit Profile"
-            // bgColor="#827885"
-            //  fgColor="white"
+            text="Profili Düzenle"
             type="PROFILE"
           />
-
-          <CustomButton
-            onPress={onSendVotes}
-            text="Votes"
-            //fgColor="white"
-            //bgColor="#827397"
-            type="PROFILE"
-          />
-
           <CustomButton
             onPress={onSendAskedQuestion}
-            text="Asked Question"
-            //  bgColor="#4D4C7D"
-            // fgColor="white"
+            text="Sorularım"
             type="PROFILE"
           />
 
           <CustomButton
             onPress={onSendMyPosts}
-            text="My Posts"
-            // bgColor="#363062"
-            //fgColor="white"
+            text="Gönderilerim"
             type="PROFILE"
           />
           <CustomButton
             onPress={() => navigation.push('Login')}
             text="Çıkış Yap"
-            //bgColor="#393050"
-            //fgColor="white"
             type="PROFILE"
           />
         </View>
-      ) : (
-        <View
-          style={{
-            width: '100%',
-            flexDirection: 'row',
-            justifyContent: 'space-evenly',
-            alignItems: 'center',
-          }}>
-          <TouchableOpacity
-            onPress={() => setFollow(!follow)}
-            style={{width: '42%'}}>
-            <View
-              style={{
-                width: '100%',
-                height: 35,
-                borderRadius: 5,
-                backgroundColor: follow ? null : '#3493D9',
-                borderWidth: follow ? 1 : 0,
-                borderColor: '#DEDEDE',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Text style={{color: follow ? 'black' : 'white'}}>
-                {follow ? 'Following' : 'Follow'}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      )}
+      ) : null}
     </>
   );
 };
-
-/*
-    <View style={{alignItems: 'center'}}>
-          <Text style={{fontWeight: 'bold', fontSize: 18}}>{post}</Text>
-          <Text>Posts</Text>
-        </View>
-        <View style={{alignItems: 'center'}}>
-          <Text style={{fontWeight: 'bold', fontSize: 18}}>{followers}</Text>
-          <Text>Followers</Text>
-        </View>
-        <View style={{alignItems: 'center'}}>
-          <Text style={{fontWeight: 'bold', fontSize: 18}}>{following}</Text>
-          <Text>Following</Text>
-        </View>
-
-*/

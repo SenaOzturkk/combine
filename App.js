@@ -7,21 +7,20 @@ import Login from './src/components/screens/Login';
 import Register from './src/components/screens/Register';
 import ForgotPassword from './src/components/screens/ForgotPassword';
 import NewPassword from './src/components/screens/NewPassword';
-import Search from './src/components/screens/Search';
 import Activity from './src/components/screens/Activity';
 import Category from './src/components/screens/Category';
 import Upload from './src/components/screens/Upload';
 import Profile from './src/components/screens/Profile';
 import Ionic from 'react-native-vector-icons/Ionicons';
-import Status from './src/components/screenComponents/Status';
 import FriendProfile from './src/components/screenComponents/FriendProfile';
 import EditProfile from './src/components/screenComponents/EditProfile';
 import PostDetail from './src/components/screenComponents/PostDetail';
 import Votes from './src/components/screenComponents/Votes';
 import InitialScreen from './src/components/screens/InitialScreen';
-import Post from './src/components/screenComponents/Post';
 import MyPosts from './src/components/screenComponents/MyPosts';
 import AskedQuestion from './src/components/screenComponents/AskedQuestion';
+import SpecialMessage from './src/components/screenComponents/SpecialMessage';
+
 const App = () => {
   const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
@@ -83,6 +82,7 @@ const App = () => {
         <Stack.Screen name="Votes" component={Votes} />
         <Stack.Screen name="MyPosts" component={MyPosts} />
         <Stack.Screen name="AskedQuestion" component={AskedQuestion} />
+        <Stack.Screen name="SpecialMessage" component={SpecialMessage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
