@@ -15,6 +15,7 @@ import baseURL from '../baseURL';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import CustomButton from './CustomButton';
+import ChoiceLogo from '../../storage/images/choiceLogo.png';
 
 const Post = ({ postInfo, isCategory, categoryLoading }) => {
   const windowWidth = Dimensions.get('window').width;
@@ -22,7 +23,7 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
   const [image, setImage] = useState(null);
   const [ppimage, setPpImage] = useState(null);
   const [username, setUsername] = useState(null);
-  const [postDetail, setPostDetail] = useState([]);
+
   const [postMarka, setPostMarka] = useState(null);
   const [postBeden, setBeden] = useState(null);
   const [postLink, setLink] = useState(null);
@@ -32,9 +33,8 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
   const [dictionary, setDictionary] = useState({});
   const navigation = useNavigation();
 
-
   const getBackButton = () => {
-    categoryLoading(true)
+    categoryLoading(true);
   };
 
   const sendVote = async (postId, uid, postIndex, dictionary) => {
@@ -182,29 +182,30 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
   const onPressActivity = async (data, index, dictionary) => {
     setIndexPost(index);
     const uid = await AsyncStorage.getItem('USER');
-    // console.log('indexPost' + indexPost);
     await sendVote(data._id, uid, index, dictionary);
   };
   const onPressOutActivity = data => {
-    //console.warn(' press out');
     setImage(null);
     setPpImage(null);
     setUsername('null');
-    setPostDetail(null);
+    // setPostDetail(null);
   };
   const onLongPressActivity = (data, pp, username, detail) => {
     setImage(data);
     setPpImage(pp);
     setUsername(username);
-    /*  var list = [];
-    for (var i = 0; i < detail.length; i++) {
-      list.push(detail[i]);
-    }
-    setPostDetail(list);*/
+
+    /*if (detail[0] == undefined) {
+      detail[0] = null;
+    }*/
     setPostMarka(detail[0]);
     setBeden(detail[1]);
     setLink(detail[2]);
     setAciklama(detail[3]);
+  };
+  const onActivityPressed = () => {
+    console.warn('activity');
+    navigation.navigate('Activity');
   };
 
   const setPost = (data, dictionary) => {
@@ -476,13 +477,45 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
     }
   };
 
-
-
-
   return (
     <>
-      {isCategory ? <CustomButton text="Geri Dön" onPress={getBackButton} />
-        : (<></>)}
+      {isCategory ? (
+        <>
+          <View
+            style={{
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}>
+            <TouchableOpacity
+              onPress={getBackButton}
+              style={{
+                justifyContent: 'space-between',
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}>
+              <Ionic name="chevron-back" style={{ fontSize: 35 }} />
+              <Text
+                style={{
+                  fontSize: 17,
+                  fontWeight: '700',
+                }}>
+                KATEGORİLER
+              </Text>
+            </TouchableOpacity>
+            <Image
+              source={ChoiceLogo}
+              style={{
+                width: 150,
+                height: 40,
+              }}
+              resizeMode="contain"
+            />
+          </View>
+        </>
+      ) : (
+        <></>
+      )}
       <ScrollView>
         {postInfo.map((data, index) => {
           const [description, setQuestion] = useState(data.description);
@@ -551,13 +584,38 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
                       borderColor: 'gray',
                       padding: 10,
                       borderRadius: 20,
-                      marginBottom: 30,
+                      marginBottom: 5,
                       fontSize: 20,
+                      marginTop: 10,
                     }}>
-                    {/* % {dictionary[(data._id, indexPost)]} */}%
-                    {dictionary[data._id]
-                      ? dictionary[data._id][indexPost]
-                      : NaN}
+                    {dictionary[data._id] ? (
+                      <Text>% {dictionary[data._id][indexPost]}</Text>
+                    ) : (
+                      <>
+                        <View
+                          style={{
+                            justifyContent: 'space-between',
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                          }}>
+                          <Ionic
+                            name="md-arrow-up-circle"
+                            style={{ fontSize: 25 }}
+                          />
+                          <Text
+                            style={{
+                              fontSize: 15,
+                            }}>
+                            Yüzdeleri görmek için seçtiğiniz fotoğrafa
+                            tıklayınız
+                          </Text>
+                          <Ionic
+                            name="md-arrow-up-circle"
+                            style={{ fontSize: 25 }}
+                          />
+                        </View>
+                      </>
+                    )}
                   </Text>
                 ) : null}
               </View>
@@ -719,6 +777,7 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
                 style={{
                   width: '50%',
                   height: '100%',
+                  resizeMode: 'contain',
                 }}
               />
               <Text
@@ -760,7 +819,7 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
                       fontWeight: '600',
                       color: 'white',
                     }}>
-                    Bedeni:
+                    Bedeni/Özellikleri:
                   </Text>
                 </View>
                 {'  ' + postBeden} {'\n'}

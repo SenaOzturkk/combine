@@ -1,23 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { View, Image, StatusBar, ScrollView, SafeAreaView } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Image, StatusBar, ScrollView, SafeAreaView} from 'react-native';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import Post from '../screenComponents/Post';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import ChoiceLogo from '../../storage/images/choiceLogo.png';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import baseURL from '../baseURL';
 
 const Home = () => {
-  const [postInfos, setPostInfos] = useState({})
-  const [loading, setLoading] = useState(true)
+  const [postInfos, setPostInfos] = useState({});
+  const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
 
   useEffect(() => {
-    fetchData()
-  }, [])
-
+    fetchData();
+  }, []);
 
   const fetchData = () => {
     fetch(baseURL + 'post')
@@ -25,11 +23,14 @@ const Home = () => {
         return response.json();
       })
       .then(function (json) {
-        setPostInfos(json)
-        setLoading(false)
+        setPostInfos(json);
+        setLoading(false);
       })
       .catch(function (error) {
-        console.log('There has been a problem with your fetch operation: ' + error.message);
+        console.log(
+          'There has been a problem with your fetch operation: ' +
+            error.message,
+        );
         throw error;
       });
   };
@@ -40,7 +41,7 @@ const Home = () => {
   };
 
   return (
-    <SafeAreaView style={{ backgroundColor: 'white', height: '100%' }}>
+    <SafeAreaView style={{backgroundColor: 'white', height: '100%'}}>
       <StatusBar
         backgroundColor="white"
         barStyle="dark-content"
@@ -66,7 +67,7 @@ const Home = () => {
 
         <Ionic
           name="ios-notifications-sharp"
-          style={{ fontSize: 30, color: 'black' }}
+          style={{fontSize: 30, color: 'black'}}
           onPress={onActivityPressed}
         />
       </View>
@@ -74,10 +75,10 @@ const Home = () => {
       <View>
         {loading ? <></> : <Post postInfo={postInfos} />}
         <View
-          style={{ justifyContent: 'center', alignItems: 'center', padding: 50 }}>
+          style={{justifyContent: 'center', alignItems: 'center', padding: 50}}>
           <Ionic
             name="ios-reload-circle-sharp"
-            style={{ fontSize: 60, opacity: 0.2 }}
+            style={{fontSize: 60, opacity: 0.2}}
           />
         </View>
       </View>

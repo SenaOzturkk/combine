@@ -1,14 +1,43 @@
-import React from 'react';
 import { View, Text, ScrollView, SafeAreaView } from 'react-native';
 import { ProfileBody, ProfileButtons } from '../screenComponents/ProfileBody';
 
 import CustomButton from '../screenComponents/CustomButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
+import baseURL from '../baseURL';
 
 const Profile = () => {
   const navigation = useNavigation();
+  const [postInfos, setPostInfos] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [username, setUsername] = useState(null);
+  const [userPp, setUserPp] = useState(null);
 
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = () => {
+    fetch(baseURL + 'post')
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (json) {
+        setPostInfos(json);
+        console.log(json)
+        const a = AsyncStorage.getItem('USER');
+        setLoading(false);
+        setUsername('deneme');
+      })
+      .catch(function (error) {
+        console.log(
+          'There has been a problem with your fetch operation: ' +
+          error.message,
+        );
+        throw error;
+      });
+  };
   const isUserSignedIn = async () => {
     const a = await AsyncStorage.getItem('USER');
     console.log(a);
@@ -29,18 +58,15 @@ const Profile = () => {
       style={{ width: '100%', height: '100%', backgroundColor: 'white' }}>
       <View style={{ width: '100%', padding: 10 }}>
         <ProfileBody
-          name="aa"
-          accountName="djjeneme"
-          profileImage={require('../../storage/images/userProfile.png')}
-          followers="3.6M"
-          following="35"
-          post="458"
+          name={username}
+          accountName={username}
+          profileImage={userPp}
         />
         <ProfileButtons
           id={0}
-          name="Mr Peobody"
-          accountName="mr_peobody"
-          profileImage={require('../../storage/images/userProfile.png')}
+          name={username}
+          accountName={username}
+          profileImage={userPp}
         />
       </View>
     </SafeAreaView>
@@ -48,19 +74,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
-/*
- <CustomButton
-        text="Sign In with Facebook"
-        onPress={isUserSignedIn}
-        bgColor="#E7EAF4"
-        fgColor="#4765A9"
-      />
-      <CustomButton
-        text="Print"
-        onPress={isUserLoggedIn}
-        bgColor="#E7EAF4"
-        fgColor="#4765A9"
-      />
-
-*/

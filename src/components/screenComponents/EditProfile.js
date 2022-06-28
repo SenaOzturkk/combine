@@ -31,7 +31,7 @@ const EditProfile = ({route, navigation}) => {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionic name="close-outline" style={{fontSize: 35}} />
         </TouchableOpacity>
-        <Text style={{fontSize: 16, fontWeight: 'bold'}}>Edit Profile</Text>
+        <Text style={{fontSize: 16, fontWeight: 'bold'}}>Profili Düzenle</Text>
         <TouchableOpacity
           onPress={() => {
             TostMessage();
@@ -49,7 +49,7 @@ const EditProfile = ({route, navigation}) => {
           style={{
             color: 'black',
           }}>
-          Change profile photo
+          Profil Fotoğrafını Değiştir
         </Text>
       </View>
       <View style={{padding: 10}}>
@@ -58,11 +58,26 @@ const EditProfile = ({route, navigation}) => {
             style={{
               opacity: 0.5,
             }}>
-            Username
+            Kullanıcı Adı
           </Text>
           <TextInput
             placeholder="accountname"
             defaultValue={accountName}
+            style={{
+              fontSize: 16,
+              borderBottomWidth: 1,
+              borderColor: '#CDCDCD',
+            }}
+          />
+        </View>
+        <View style={{paddingVertical: 10}}>
+          <Text
+            style={{
+              opacity: 0.5,
+            }}>
+            Şifre
+          </Text>
+          <TextInput
             style={{
               fontSize: 16,
               borderBottomWidth: 1,
