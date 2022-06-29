@@ -1,9 +1,9 @@
-import {View, SafeAreaView, Image, ScrollView} from 'react-native';
-import React, {useState} from 'react';
+import { View, SafeAreaView, Image, ScrollView } from 'react-native';
+import React, { useState } from 'react';
 import ChoiceLogo from '../../storage/images/choiceLogo.png';
 import CustomInput from '../screenComponents/CustomInput';
 import CustomButton from '../screenComponents/CustomButton';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
@@ -42,7 +42,7 @@ const Login = () => {
 
   const onSignInGoogle = async () => {
     console.warn('google');
-    await AsyncStorage.setItem('USER', '61881d3780c9116915159b1b');
+    await AsyncStorage.setItem('USER', '6292816fa188c48312160773');
   };
 
   const onSignUpdPressed = () => {

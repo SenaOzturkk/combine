@@ -8,27 +8,25 @@ import {
   TouchableOpacity,
   ToastAndroid,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import DropdownComponent from '../screenComponents/DropdownComponent';
 import CustomInput from '../screenComponents/CustomInput';
 import CustomButton from '../screenComponents/CustomButton';
 import Ionic from 'react-native-vector-icons/Ionicons';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 const PostDetail = () => {
   const [detail, setDetail] = useState('');
   const [question, setQuestion] = useState('');
   const navigation = useNavigation();
-  const TostMessage = () => {
-    ToastAndroid.show('Sucessfully !', ToastAndroid.SHORT);
-  };
+
   const dataCategory = [
-    {label: 'Giyim', value: 'Giyim'},
-    {label: 'Teknoloji', value: 'Teknoloji'},
-    {label: 'Araba', value: 'Araba'},
-    {label: 'Eşya', value: 'Eşya'},
-    {label: 'Hediye', value: 'Hediye'},
-    {label: 'Tatil', value: 'Tatil'},
+    { label: 'Giyim', value: 'Giyim' },
+    { label: 'Teknoloji', value: 'Teknoloji' },
+    { label: 'Araba', value: 'Araba' },
+    { label: 'Eşya', value: 'Eşya' },
+    { label: 'Hediye', value: 'Hediye' },
+    { label: 'Tatil', value: 'Tatil' },
   ];
 
   const onSendPressed = () => {
@@ -47,7 +45,7 @@ const PostDetail = () => {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionic
               name="close-outline"
-              style={{fontSize: 35, color: 'black'}}
+              style={{ fontSize: 35, color: 'black' }}
             />
           </TouchableOpacity>
           <Text
@@ -60,10 +58,9 @@ const PostDetail = () => {
           </Text>
           <TouchableOpacity
             onPress={() => {
-              TostMessage();
               navigation.goBack();
             }}>
-            <Ionic name="checkmark" style={{fontSize: 35, color: 'black'}} />
+            <Ionic name="checkmark" style={{ fontSize: 35, color: 'black' }} />
           </TouchableOpacity>
         </View>
         <Text

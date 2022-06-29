@@ -1,103 +1,91 @@
 import {
   View,
-  Text,
   StyleSheet,
-  Button,
-  Image,
   ScrollView,
   SafeAreaView,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import DropdownComponent from '../screenComponents/DropdownComponent';
 import CustomInput from '../screenComponents/CustomInput';
 import CustomButton from '../screenComponents/CustomButton';
-import Ionic from 'react-native-vector-icons/Ionicons';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { launchImageLibrary } from 'react-native-image-picker';
+import baseURL from '../baseURL';
 
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 const Upload = () => {
-  const [detail, setDetail] = useState('');
-  const [question, setQuestion] = useState('');
-  const [imageUri, setImageUri] = useState('');
+  const [images, setImages] = useState({});
+  const [description, setDescription] = useState('');
+  const [uid, setUid] = useState()
+  const [category, setCategory] = useState('Aksesuar')
+  const [details, setDetails] = useState([]);
   const navigation = useNavigation();
 
   const dataCategory = [
-    {label: 'Giyim', value: 'Giyim'},
-    {label: 'Teknoloji', value: 'Teknoloji'},
-    {label: 'Araba', value: 'Araba'},
-    {label: 'Eşya', value: 'Eşya'},
-    {label: 'Hediye', value: 'Hediye'},
-    {label: 'Tatil', value: 'Tatil'},
+    { label: 'Giyim', value: 'Giyim' },
+    { label: 'Teknoloji', value: 'Teknoloji' },
+    { label: 'Araba', value: 'Araba' },
+    { label: 'Eşya', value: 'Eşya' },
+    { label: 'Hediye', value: 'Hediye' },
+    { label: 'Tatil', value: 'Tatil' },
   ];
-  const dataSablon = [
-    {label: 'Tekli', value: 'Tekli'},
-    {label: 'İkili', value: 'İkili'},
-    {label: 'Çoklu', value: 'Çoklu'},
-  ];
-  const onSendPressed = () => {
-    console.warn('post send');
-  };
+
+  const getUserID = async () => {
+    const a = await AsyncStorage.getItem('USER');
+    setUid(a)
+  }
+
+  useEffect(() => {
+    getUserID()
+  }, []);
+
+
   const onDetailPressed = () => {
     navigation.navigate('PostDetail');
   };
 
-  const openCamera = () => {
+  const openImages = async () => {
     let options = {
-      /* storageOptions: {
-        path: 'images',
-        mediaType: 'photo',
-      },
-      includeBase64: true,*/
-      includeBase64: true,
       mediaType: 'photo',
       quality: 1,
       noData: true,
+      selectionLimit: 0
     };
-    launchCamera(options, response => {
-      console.log('response', response);
-      if (response.didCancel) {
-        console.log('user cancelled image picker');
-      } else if (response.error) {
-        console.log(' image picker error', response.error);
-      } else if (response.customButton) {
-        console.log('user cancelled image picker', response.customButton);
-      } else {
-        // const source = {uri: 'data:/image/jpeg,' + response.base64};
-        // setImageUri(response.assest[0].base64);
-        setImageUri(response);
+    const images = await launchImageLibrary(options);
+    setImages(images)
+  }
+
+  const gonder = async (images) => {
+    const formData = new FormData()
+    formData.append('post', {
+      uri: images.assets[0].uri,
+      tpye: images.assets[0].type,
+      name: images.assets[0].fileName
+    })
+    formData.append('post', {
+      uri: images.assets[1].uri,
+      tpye: images.assets[1].type,
+      name: images.assets[1].fileName
+    })
+    let res = await fetch(
+      "http://10.100.0.11:5000/api/post",
+      {
+        method: 'post',
+        body: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       }
-    });
-  };
-  const openGallery = () => {
-    let options = {
-      /* storageOptions: {
-        path: 'images',
-        mediaType: 'photo',
-      },
-      includeBase64: true,*/
-      includeBase64: true,
-      mediaType: 'photo',
-      quality: 1,
-      noData: true,
-    };
-    launchImageLibrary(options, response => {
-      console.log('response', response);
-      if (response.didCancel) {
-        console.log('user cancelled image picker');
-      } else if (response.error) {
-        console.log(' image picker error', response.error);
-      } else if (response.customButton) {
-        console.log('user cancelled image picker', response.customButton);
-      } else {
-        // const source = {uri: 'data:/image/jpeg,' + response.base64};
-        // setImageUri(response.assest[0].base64);
-        setImageUri(response);
-      }
-    });
-  };
-  const handleChoosePhoto = () => {
-    openCamera();
-  };
+    )
+    let resposeJson = await res.json()
+    console.log(resposeJson)
+  }
+
+  const yazdir = () => {
+    console.log(uid)
+  }
+
+
   return (
     <SafeAreaView
       style={{
@@ -112,6 +100,7 @@ const Upload = () => {
             text="Kategori"
             icon="ios-grid"
             data={dataCategory}
+            setValue={setCategory}
           />
           <View
             style={{
@@ -124,7 +113,7 @@ const Upload = () => {
             }}>
             <CustomButton
               text="Kamerayı Aç"
-              onPress={openCamera}
+              onPress={openImages}
               bgColor="black"
               fgColor="white"
               type="SQUARE"
@@ -132,7 +121,7 @@ const Upload = () => {
 
             <CustomButton
               text="Galeriyi Aç"
-              onPress={openGallery}
+              onPress={openImages}
               bgColor="black"
               fgColor="white"
               type="SQUARE"
@@ -141,15 +130,16 @@ const Upload = () => {
           <View style={styles.bottomContainer}>
             <CustomInput
               placeholder="Soru Metni Giriniz"
-              value={question}
-              setValue={setQuestion}
+              value={description}
+              setValue={setDescription}
             />
 
             <CustomButton
               text="Ürünlere detay girmek için tıklayınız"
               onPress={onDetailPressed}
             />
-            <CustomButton text="Gönder" onPress={onSendPressed} />
+            <CustomButton text="Gönder" onPress={gonder} />
+            <CustomButton text="yazdir" onPress={yazdir} />
           </View>
         </View>
       </ScrollView>
