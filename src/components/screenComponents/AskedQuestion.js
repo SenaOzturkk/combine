@@ -8,7 +8,6 @@ import {
   SafeAreaView,
 } from 'react-native';
 import {FriendsProfileData} from '../screenComponents/Database';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
 
 const Activity = () => {

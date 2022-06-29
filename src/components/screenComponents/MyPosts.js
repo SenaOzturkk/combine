@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import baseURL from '../baseURL';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import Ionic from 'react-native-vector-icons/Ionicons';
 
 const MyPosts = () => {
@@ -21,10 +21,10 @@ const MyPosts = () => {
   const setPost = data => {
     if (data.mediaCount === 1) {
       return (
-        <TouchableOpacity style={{ width: '100%', height: 400 }}>
+        <TouchableOpacity style={{width: '100%', height: 400}}>
           <Image
-            source={{ uri: data.medias[0] }}
-            style={{ width: '100%', height: 400 }}
+            source={{uri: data.medias[0]}}
+            style={{width: '100%', height: 400}}
             resizeMode="contain"
           />
         </TouchableOpacity>
@@ -32,19 +32,19 @@ const MyPosts = () => {
     } else if (data.mediaCount === 2) {
       return (
         <>
-          <TouchableOpacity style={{ width: 200, height: 400 }}>
+          <TouchableOpacity style={{width: 200, height: 400}}>
             <Image
-              source={{ uri: data.medias[0] }}
+              source={{uri: data.medias[0]}}
               resizeMode="contain"
-              style={{ width: 200, height: 400 }}
+              style={{width: 200, height: 400}}
             />
           </TouchableOpacity>
 
-          <TouchableOpacity style={{ width: 200, height: 400 }}>
+          <TouchableOpacity style={{width: 200, height: 400}}>
             <Image
-              source={{ uri: data.medias[1] }}
+              source={{uri: data.medias[1]}}
               resizeMode="contain"
-              style={{ width: 200, height: 400 }}
+              style={{width: 200, height: 400}}
             />
           </TouchableOpacity>
         </>
@@ -52,8 +52,8 @@ const MyPosts = () => {
     } else if (data.mediaCount === 3) {
       return (
         <>
-          <View style={{ flexDirection: 'row' }}>
-            <View style={{ flexDirection: 'column' }}>
+          <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'column'}}>
               <TouchableOpacity
                 style={{
                   flex: 1,
@@ -66,7 +66,7 @@ const MyPosts = () => {
                     width: 200,
                     height: 200,
                   }}
-                  source={{ uri: data.medias[0] }}
+                  source={{uri: data.medias[0]}}
                 />
               </TouchableOpacity>
 
@@ -82,11 +82,11 @@ const MyPosts = () => {
                     width: 200,
                     height: 200,
                   }}
-                  source={{ uri: data.medias[1] }}
+                  source={{uri: data.medias[1]}}
                 />
               </TouchableOpacity>
             </View>
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{flexDirection: 'row'}}>
               <TouchableOpacity
                 style={{
                   flexDirection: 'row',
@@ -99,7 +99,7 @@ const MyPosts = () => {
                     width: 200,
                     height: 400,
                   }}
-                  source={{ uri: data.medias[2] }}
+                  source={{uri: data.medias[2]}}
                 />
               </TouchableOpacity>
             </View>
@@ -109,8 +109,8 @@ const MyPosts = () => {
     } else if (data.mediaCount === 4) {
       return (
         <>
-          <View style={{ flexDirection: 'row' }}>
-            <View style={{ flexDirection: 'column' }}>
+          <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'column'}}>
               <TouchableOpacity
                 style={{
                   flex: 1,
@@ -123,7 +123,7 @@ const MyPosts = () => {
                     width: 200,
                     height: 200,
                   }}
-                  source={{ uri: data.medias[0] }}
+                  source={{uri: data.medias[0]}}
                 />
               </TouchableOpacity>
 
@@ -139,12 +139,12 @@ const MyPosts = () => {
                     width: 200,
                     height: 200,
                   }}
-                  source={{ uri: data.medias[1] }}
+                  source={{uri: data.medias[1]}}
                 />
               </TouchableOpacity>
             </View>
-            <View style={{ flexDirection: 'row' }}>
-              <View style={{ flexDirection: 'column' }}>
+            <View style={{flexDirection: 'row'}}>
+              <View style={{flexDirection: 'column'}}>
                 <TouchableOpacity
                   style={{
                     flex: 1,
@@ -157,7 +157,7 @@ const MyPosts = () => {
                       width: 200,
                       height: 200,
                     }}
-                    source={{ uri: data.medias[2] }}
+                    source={{uri: data.medias[2]}}
                   />
                 </TouchableOpacity>
 
@@ -173,7 +173,7 @@ const MyPosts = () => {
                       width: 200,
                       height: 200,
                     }}
-                    source={{ uri: data.medias[3] }}
+                    source={{uri: data.medias[3]}}
                   />
                 </TouchableOpacity>
               </View>
@@ -192,18 +192,16 @@ const MyPosts = () => {
     isUserLoggedIn();
   }, []);
 
-  const fetchData = (_id) => {
+  const fetchData = _id => {
     if (user != null) {
-
       var myHeaders = new Headers();
-      console.log(user)
-      myHeaders.append("uid", user);
+      myHeaders.append('uid', user);
       // myHeaders.append("uid", "61c70dd33174c6b0f2c80302");
 
       var requestOptions = {
         method: 'GET',
         headers: myHeaders,
-        redirect: 'follow'
+        redirect: 'follow',
       };
 
       fetch(baseURL + 'post', requestOptions)
@@ -217,7 +215,7 @@ const MyPosts = () => {
         .catch(function (error) {
           console.log(
             'There has been a problem with your fetch operation: ' +
-            error.message,
+              error.message,
           );
           throw error;
         });
@@ -231,8 +229,8 @@ const MyPosts = () => {
 
   return (
     <SafeAreaView
-      style={{ width: '100%', height: '100%', backgroundColor: 'white' }}>
-      <View style={{ width: '100%', padding: 10 }}>
+      style={{width: '100%', height: '100%', backgroundColor: 'white'}}>
+      <View style={{width: '100%', padding: 10}}>
         <View
           style={{
             flexDirection: 'row',
@@ -296,13 +294,13 @@ const MyPosts = () => {
                         padding: 15,
                       }}>
                       <View
-                        style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        style={{flexDirection: 'row', alignItems: 'center'}}>
                         <Image
-                          source={{ uri: data.userPicture[0] }}
-                          style={{ width: 40, height: 40, borderRadius: 100 }}
+                          source={{uri: data.userPicture[0]}}
+                          style={{width: 40, height: 40, borderRadius: 100}}
                         />
-                        <View style={{ paddingLeft: 5 }}>
-                          <Text style={{ fontSize: 15, fontWeight: 'bold' }}>
+                        <View style={{paddingLeft: 5}}>
+                          <Text style={{fontSize: 15, fontWeight: 'bold'}}>
                             {data.userdetails[0].username}
                           </Text>
                         </View>

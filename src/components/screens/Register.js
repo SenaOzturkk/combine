@@ -1,8 +1,8 @@
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
-import React, { useState } from 'react';
+import {View, Text, ScrollView, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
 import CustomInput from '../screenComponents/CustomInput';
 import CustomButton from '../screenComponents/CustomButton';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import baseURL from '../baseURL';
@@ -22,16 +22,17 @@ const Login = () => {
       data: {
         email: email,
         password: password,
-        username: username
-      }
+        username: username,
+      },
     });
-    console.log(response.data)
-    console.log(response.data.insertedId)
-    if (response.data.insertedId != null || response.data.insertedId != undefined) {
-      await AsyncStorage.setItem('USER', response.data.insertedId)
+
+    if (
+      response.data.insertedId != null ||
+      response.data.insertedId != undefined
+    ) {
+      await AsyncStorage.setItem('USER', response.data.insertedId);
       navigation.navigate('Bottom');
     }
-
   };
 
   const onTermsOfUsePressed = () => {

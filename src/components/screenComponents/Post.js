@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -9,7 +9,7 @@ import {
   ScrollView,
 } from 'react-native';
 import Ionic from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import DropdownComponent from '../screenComponents/DropdownComponent';
 import baseURL from '../baseURL';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -17,7 +17,7 @@ import axios from 'axios';
 import CustomButton from './CustomButton';
 import ChoiceLogo from '../../storage/images/choiceLogo.png';
 
-const Post = ({ postInfo, isCategory, categoryLoading }) => {
+const Post = ({postInfo, isCategory, categoryLoading}) => {
   const windowWidth = Dimensions.get('window').width;
   const windoeHeight = Dimensions.get('window').height;
   const [image, setImage] = useState(null);
@@ -52,7 +52,6 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
     };
     axios(config)
       .then(function (response) {
-        // console.log("response.data.votes", response.data.votes);
         var sumVotes = 0;
         for (var i in response.data.votes) {
           sumVotes += response.data.votes[i];
@@ -105,78 +104,78 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
   };
 
   const categoryAyakkabi = [
-    { label: 'Markası', value: 'Markası' },
-    { label: 'Ayakkabı Numarası', value: 'Ayakkabı Numarası' },
-    { label: 'Rengi', value: 'Rengi' },
-    { label: 'Ürünün Kodu', value: 'Ürünün Kodu' },
-    { label: 'Fiyatı', value: 'Fiyatı' },
-    { label: 'Linki', value: 'Link' },
+    {label: 'Markası', value: 'Markası'},
+    {label: 'Ayakkabı Numarası', value: 'Ayakkabı Numarası'},
+    {label: 'Rengi', value: 'Rengi'},
+    {label: 'Ürünün Kodu', value: 'Ürünün Kodu'},
+    {label: 'Fiyatı', value: 'Fiyatı'},
+    {label: 'Linki', value: 'Link'},
   ];
   const categoryGiyim = [
-    { label: 'Markası', value: 'Markası' },
-    { label: 'Bedeni', value: 'Bedeni' },
-    { label: 'Rengi', value: 'Rengi' },
-    { label: 'Ürünün Kodu', value: 'Ürünün Kodu' },
-    { label: 'Fiyatı', value: 'Fiyatı' },
-    { label: 'Linki', value: 'Link' },
+    {label: 'Markası', value: 'Markası'},
+    {label: 'Bedeni', value: 'Bedeni'},
+    {label: 'Rengi', value: 'Rengi'},
+    {label: 'Ürünün Kodu', value: 'Ürünün Kodu'},
+    {label: 'Fiyatı', value: 'Fiyatı'},
+    {label: 'Linki', value: 'Link'},
   ];
 
   const categoryAksesuar = [
-    { label: 'Markası', value: 'Markası' },
-    { label: 'Model', value: 'Model' },
-    { label: 'Özellikleri', value: 'Özellikleri' },
-    { label: 'Rengi', value: 'Rengi' },
-    { label: 'Ürünün Kodu', value: 'Ürünün Kodu' },
-    { label: 'Fiyatı', value: 'Fiyatı' },
-    { label: 'Linki', value: 'Link' },
+    {label: 'Markası', value: 'Markası'},
+    {label: 'Model', value: 'Model'},
+    {label: 'Özellikleri', value: 'Özellikleri'},
+    {label: 'Rengi', value: 'Rengi'},
+    {label: 'Ürünün Kodu', value: 'Ürünün Kodu'},
+    {label: 'Fiyatı', value: 'Fiyatı'},
+    {label: 'Linki', value: 'Link'},
   ];
   const categoryKombin = [
-    { label: 'Markası', value: 'Markası' },
-    { label: 'Model', value: 'Model' },
-    { label: 'Fiyatı', value: 'Fiyatı' },
-    { label: 'Linki', value: 'Link' },
+    {label: 'Markası', value: 'Markası'},
+    {label: 'Model', value: 'Model'},
+    {label: 'Fiyatı', value: 'Fiyatı'},
+    {label: 'Linki', value: 'Link'},
   ];
   const categoryHediye = [
-    { label: 'Markası', value: 'Markası' },
-    { label: 'Model', value: 'Model' },
-    { label: 'Özellikleri', value: 'Özellikleri' },
-    { label: 'Ürünün Kodu', value: 'Ürünün Kodu' },
-    { label: 'Fiyatı', value: 'Fiyatı' },
-    { label: 'Linki', value: 'Link' },
+    {label: 'Markası', value: 'Markası'},
+    {label: 'Model', value: 'Model'},
+    {label: 'Özellikleri', value: 'Özellikleri'},
+    {label: 'Ürünün Kodu', value: 'Ürünün Kodu'},
+    {label: 'Fiyatı', value: 'Fiyatı'},
+    {label: 'Linki', value: 'Link'},
   ];
   const categoryTatil = [
-    { label: 'Ülke/Şehir', value: 'Şehir' },
-    { label: 'Otel Adı', value: 'Otel' },
-    { label: 'İmkanlar', value: 'İmkanlar' },
-    { label: 'Gecelik Fiyatı', value: 'Gecelik Fiyatı' },
-    { label: 'Linki', value: 'Link' },
+    {label: 'Ülke/Şehir', value: 'Şehir'},
+    {label: 'Otel Adı', value: 'Otel'},
+    {label: 'İmkanlar', value: 'İmkanlar'},
+    {label: 'Gecelik Fiyatı', value: 'Gecelik Fiyatı'},
+    {label: 'Linki', value: 'Link'},
   ];
   const categoryVasita = [
-    { label: 'Markası', value: 'Markası' },
-    { label: 'Model', value: 'Model' },
-    { label: 'Rengi', value: 'Rengi' },
-    { label: 'Km', value: 'Km' },
-    { label: 'Yıl', value: 'Yıl' },
-    { label: 'Yakıt Türü', value: 'Yakıt Türü' },
-    { label: 'Fiyatı', value: 'Fiyatı' },
-    { label: 'Linki', value: 'Link' },
+    {label: 'Markası', value: 'Markası'},
+    {label: 'Model', value: 'Model'},
+    {label: 'Rengi', value: 'Rengi'},
+    {label: 'Km', value: 'Km'},
+    {label: 'Yıl', value: 'Yıl'},
+    {label: 'Yakıt Türü', value: 'Yakıt Türü'},
+    {label: 'Fiyatı', value: 'Fiyatı'},
+    {label: 'Linki', value: 'Link'},
   ];
   const categoryTeknoloji = [
-    { label: 'Markası', value: 'Markası' },
-    { label: 'Model', value: 'Model' },
-    { label: 'Özellikleri', value: 'Özellikleri' },
-    { label: 'Rengi', value: 'Rengi' },
-    { label: 'Ürünün Kodu', value: 'Ürünün Kodu' },
-    { label: 'Fiyatı', value: 'Fiyatı' },
-    { label: 'Linki', value: 'Link' },
+    {label: 'Markası', value: 'Markası'},
+    {label: 'Model', value: 'Model'},
+    {label: 'Özellikleri', value: 'Özellikleri'},
+    {label: 'Rengi', value: 'Rengi'},
+    {label: 'Ürünün Kodu', value: 'Ürünün Kodu'},
+    {label: 'Fiyatı', value: 'Fiyatı'},
+    {label: 'Linki', value: 'Link'},
   ];
   const categoryEv = [
-    { label: 'Markası', value: 'Markası' },
-    { label: 'Rengi', value: 'Rengi' },
-    { label: 'Özellikleri', value: 'Özellikleri' },
-    { label: 'Ürünün Kodu', value: 'Ürünün Kodu' },
-    { label: 'Fiyatı', value: 'Fiyatı' },
-    { label: 'Linki', value: 'Link' },
+    {label: 'Markası', value: 'Markası'},
+    {label: 'Rengi', value: 'Rengi'},
+    {label: 'Özellikleri', value: 'Özellikleri'},
+    {label: 'Ürünün Kodu', value: 'Ürünün Kodu'},
+    {label: 'Fiyatı', value: 'Fiyatı'},
+    {label: 'Linki', value: 'Link'},
   ];
 
   const onPressActivity = async (data, index, dictionary) => {
@@ -222,10 +221,10 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
               data.detail,
             );
           }}
-          style={{ width: '100%', height: 400 }}>
+          style={{width: '100%', height: 400}}>
           <Image
-            source={{ uri: data.medias[0] }}
-            style={{ width: '100%', height: 400 }}
+            source={{uri: data.medias[0]}}
+            style={{width: '100%', height: 400}}
             resizeMode="contain"
           />
         </TouchableOpacity>
@@ -234,7 +233,7 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
       return (
         <>
           <TouchableOpacity
-            style={{ width: 200, height: 400 }}
+            style={{width: 200, height: 400}}
             onPress={() => onPressActivity(data, 0, dictionary)}
             onLongPress={() => {
               onLongPressActivity(
@@ -246,14 +245,14 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
             }}
             onPressOut={() => onPressOutActivity(data)}>
             <Image
-              source={{ uri: data.medias[0] }}
+              source={{uri: data.medias[0]}}
               resizeMode="contain"
-              style={{ width: 200, height: 400 }}
+              style={{width: 200, height: 400}}
             />
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={{ width: 200, height: 400 }}
+            style={{width: 200, height: 400}}
             onPress={() => onPressActivity(data, 1, dictionary)}
             onPressOut={() => onPressOutActivity(data)}
             onLongPress={() => {
@@ -265,9 +264,9 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
               );
             }}>
             <Image
-              source={{ uri: data.medias[1] }}
+              source={{uri: data.medias[1]}}
               resizeMode="contain"
-              style={{ width: 200, height: 400 }}
+              style={{width: 200, height: 400}}
             />
           </TouchableOpacity>
         </>
@@ -275,8 +274,8 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
     } else if (data.mediaCount === 3) {
       return (
         <>
-          <View style={{ flexDirection: 'row' }}>
-            <View style={{ flexDirection: 'column' }}>
+          <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'column'}}>
               <TouchableOpacity
                 style={{
                   flex: 1,
@@ -299,7 +298,7 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
                     width: 200,
                     height: 200,
                   }}
-                  source={{ uri: data.medias[0] }}
+                  source={{uri: data.medias[0]}}
                 />
               </TouchableOpacity>
 
@@ -325,11 +324,11 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
                     width: 200,
                     height: 200,
                   }}
-                  source={{ uri: data.medias[1] }}
+                  source={{uri: data.medias[1]}}
                 />
               </TouchableOpacity>
             </View>
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{flexDirection: 'row'}}>
               <TouchableOpacity
                 style={{
                   flexDirection: 'row',
@@ -352,7 +351,7 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
                     width: 200,
                     height: 400,
                   }}
-                  source={{ uri: data.medias[2] }}
+                  source={{uri: data.medias[2]}}
                 />
               </TouchableOpacity>
             </View>
@@ -362,8 +361,8 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
     } else if (data.mediaCount === 4) {
       return (
         <>
-          <View style={{ flexDirection: 'row' }}>
-            <View style={{ flexDirection: 'column' }}>
+          <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'column'}}>
               <TouchableOpacity
                 style={{
                   flex: 1,
@@ -386,7 +385,7 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
                     width: 200,
                     height: 200,
                   }}
-                  source={{ uri: data.medias[0] }}
+                  source={{uri: data.medias[0]}}
                 />
               </TouchableOpacity>
 
@@ -412,12 +411,12 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
                     width: 200,
                     height: 200,
                   }}
-                  source={{ uri: data.medias[1] }}
+                  source={{uri: data.medias[1]}}
                 />
               </TouchableOpacity>
             </View>
-            <View style={{ flexDirection: 'row' }}>
-              <View style={{ flexDirection: 'column' }}>
+            <View style={{flexDirection: 'row'}}>
+              <View style={{flexDirection: 'column'}}>
                 <TouchableOpacity
                   style={{
                     flex: 1,
@@ -440,7 +439,7 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
                       width: 200,
                       height: 200,
                     }}
-                    source={{ uri: data.medias[2] }}
+                    source={{uri: data.medias[2]}}
                   />
                 </TouchableOpacity>
 
@@ -466,7 +465,7 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
                       width: 200,
                       height: 200,
                     }}
-                    source={{ uri: data.medias[3] }}
+                    source={{uri: data.medias[3]}}
                   />
                 </TouchableOpacity>
               </View>
@@ -494,7 +493,7 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
                 flexDirection: 'row',
                 alignItems: 'center',
               }}>
-              <Ionic name="chevron-back" style={{ fontSize: 35 }} />
+              <Ionic name="chevron-back" style={{fontSize: 35}} />
               <Text
                 style={{
                   fontSize: 17,
@@ -538,13 +537,13 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
                   justifyContent: 'space-between',
                   padding: 15,
                 }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Image
-                    source={{ uri: data.userPicture[0] }}
-                    style={{ width: 40, height: 40, borderRadius: 100 }}
+                    source={{uri: data.userPicture[0]}}
+                    style={{width: 40, height: 40, borderRadius: 100}}
                   />
-                  <View style={{ paddingLeft: 5 }}>
-                    <Text style={{ fontSize: 15, fontWeight: 'bold' }}>
+                  <View style={{paddingLeft: 5}}>
+                    <Text style={{fontSize: 15, fontWeight: 'bold'}}>
                       {data.userdetails[0].username}
                     </Text>
                   </View>
@@ -600,7 +599,7 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
                           }}>
                           <Ionic
                             name="md-arrow-up-circle"
-                            style={{ fontSize: 25 }}
+                            style={{fontSize: 25}}
                           />
                           <Text
                             style={{
@@ -611,7 +610,7 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
                           </Text>
                           <Ionic
                             name="md-arrow-up-circle"
-                            style={{ fontSize: 25 }}
+                            style={{fontSize: 25}}
                           />
                         </View>
                       </>
@@ -708,7 +707,7 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
                     />
                   ) : null}
                 </View>
-                <View style={{ marginTop: 15 }}>
+                <View style={{marginTop: 15}}>
                   <CustomButton
                     text="Sor"
                     bgColor="black"
@@ -750,15 +749,15 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
                 paddingHorizontal: 15,
               }}>
               <Image
-                source={{ uri: ppimage }}
+                source={{uri: ppimage}}
                 style={{
                   width: 30,
                   height: 30,
                   borderRadius: 100,
                 }}
               />
-              <View style={{ paddingLeft: 8 }}>
-                <Text style={{ fontSize: 12, fontWeight: '600' }}>
+              <View style={{paddingLeft: 8}}>
+                <Text style={{fontSize: 12, fontWeight: '600'}}>
                   {username}
                 </Text>
               </View>
@@ -773,7 +772,7 @@ const Post = ({ postInfo, isCategory, categoryLoading }) => {
                 padding: 8,
               }}>
               <Image
-                source={{ uri: image }}
+                source={{uri: image}}
                 style={{
                   width: '50%',
                   height: '100%',

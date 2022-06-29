@@ -41,9 +41,7 @@ const App = () => {
               iconName = focused ? 'home-sharp' : 'home-outline';
               size = focused ? size + 8 : size + 2;
             } else if (route.name === 'Activity') {
-              iconName = focused
-                ? 'ios-notifications-sharp'
-                : 'ios-notifications-outline';
+              iconName = focused ? 'ios-chatbox' : 'ios-chatbox-outline';
             } else if (route.name === 'Profile') {
               iconName = focused ? 'ios-person-circle' : 'ios-person-outline';
             } else if (route.name === 'Upload') {

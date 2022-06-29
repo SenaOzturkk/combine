@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import CustomButton from '../screenComponents/CustomButton';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import Post from './Post';
@@ -34,7 +34,7 @@ export const ProfileBody = ({
             flexDirection: 'row',
           }}>
           <Image
-            source={profileImage}
+            source={{uri: profileImage}}
             style={{
               resizeMode: 'cover',
               width: 100,
@@ -57,9 +57,9 @@ export const ProfileBody = ({
   );
 };
 
-export const ProfileButtons = ({ id, name, accountName, profileImage }) => {
+export const ProfileButtons = ({id, name, accountName, profileImage}) => {
   const navigation = useNavigation();
-  const [myPosts, setMyPosts] = useState({})
+  const [myPosts, setMyPosts] = useState({});
   const [follow, setFollow] = useState(follow);
 
   const onSendAskedQuestion = () => {
@@ -72,17 +72,20 @@ export const ProfileButtons = ({ id, name, accountName, profileImage }) => {
         return response.json();
       })
       .then(function (json) {
-        setMyPosts(json)
+        setMyPosts(json);
       })
       .catch(function (error) {
-        console.log('There has been a problem with your fetch operation: ' + error.message);
+        console.log(
+          'There has been a problem with your fetch operation: ' +
+            error.message,
+        );
         throw error;
       });
   };
 
   const getBack = () => {
-    navigation.navigate('Profile')
-  }
+    navigation.navigate('Profile');
+  };
 
   const onSendMyPosts = () => {
     navigation.navigate('MyPosts');

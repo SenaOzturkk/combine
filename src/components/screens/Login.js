@@ -26,7 +26,7 @@ const Login = () => {
         password: password,
       },
     });
-    console.log(response.data);
+
     await AsyncStorage.setItem('USER', response.data.userID);
     navigation.navigate('Bottom');
   };
@@ -38,7 +38,6 @@ const Login = () => {
 
   const onSignInFacebook = async () => {
     const x = await AsyncStorage.getItem('USER');
-    console.log(x);
   };
 
   const onSignInGoogle = async () => {
