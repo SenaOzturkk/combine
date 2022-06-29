@@ -8,30 +8,15 @@ import {
   TouchableOpacity,
   ToastAndroid,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DropdownComponent from '../screenComponents/DropdownComponent';
 import CustomInput from '../screenComponents/CustomInput';
 import CustomButton from '../screenComponents/CustomButton';
 import Ionic from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 
-const PostDetail = () => {
-  const [detail, setDetail] = useState('');
-  const [question, setQuestion] = useState('');
+const PostDetail = ({ route }) => {
   const navigation = useNavigation();
-
-  const dataCategory = [
-    { label: 'Giyim', value: 'Giyim' },
-    { label: 'Teknoloji', value: 'Teknoloji' },
-    { label: 'Araba', value: 'Araba' },
-    { label: 'Eşya', value: 'Eşya' },
-    { label: 'Hediye', value: 'Hediye' },
-    { label: 'Tatil', value: 'Tatil' },
-  ];
-
-  const onSendPressed = () => {
-    console.warn('post send');
-  };
 
   return (
     <ScrollView showVerticalScrollIndicator={false}>
@@ -76,23 +61,23 @@ const PostDetail = () => {
         <View style={styles.bottomContainer}>
           <CustomInput
             placeholder="Marka giriniz"
-            value={question}
-            setValue={setQuestion}
+            value={route.params.detail0}
+            setValue={route.params.setDetail0}
           />
           <CustomInput
             placeholder="Beden giriniz"
-            value={question}
-            setValue={setQuestion}
+            value={route.params.detail1}
+            setValue={route.params.setDetail1}
           />
           <CustomInput
             placeholder="Link"
-            value={question}
-            setValue={setQuestion}
+            value={route.params.detail2}
+            setValue={route.params.setDetail2}
           />
           <CustomInput
             placeholder="Açıklama"
-            value={detail}
-            setValue={setDetail}
+            value={route.params.detail3}
+            setValue={route.params.setDetail3}
           />
         </View>
       </View>

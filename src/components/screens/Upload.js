@@ -17,8 +17,12 @@ const Upload = () => {
   const [images, setImages] = useState({});
   const [description, setDescription] = useState('');
   const [uid, setUid] = useState()
-  const [category, setCategory] = useState('Aksesuar')
-  const [details, setDetails] = useState([]);
+  const [category, setCategory] = useState('')
+  const [detail0, setDetail0] = useState('');
+  const [detail1, setDetail1] = useState('');
+  const [detail2, setDetail2] = useState('');
+  const [detail3, setDetail3] = useState('');
+
   const navigation = useNavigation();
 
   const dataCategory = [
@@ -41,7 +45,16 @@ const Upload = () => {
 
 
   const onDetailPressed = () => {
-    navigation.navigate('PostDetail');
+    navigation.push('PostDetail', {
+      detail0,
+      detail1,
+      detail2,
+      detail3,
+      setDetail0,
+      setDetail1,
+      setDetail2,
+      setDetail3
+    });
   };
 
   const openImages = async () => {
@@ -82,7 +95,7 @@ const Upload = () => {
   }
 
   const yazdir = () => {
-    console.log(uid)
+    console.log(detail0, detail1, detail2, detail3)
   }
 
 
@@ -100,7 +113,7 @@ const Upload = () => {
             text="Kategori"
             icon="ios-grid"
             data={dataCategory}
-            setValue={setCategory}
+            setValueData={setCategory}
           />
           <View
             style={{

@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {Dropdown} from 'react-native-element-dropdown';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { Dropdown } from 'react-native-element-dropdown';
 
 import Ionic from 'react-native-vector-icons/Ionicons';
 const dataEx = [
@@ -9,22 +9,21 @@ const dataEx = [
     value: '1',
     icon: () => <Ionic name="ios-person-circle" />, //çalışmıyor
   },
-  {label: 'Item 2', value: '2'},
-  {label: 'Item 3', value: '3'},
-  {label: 'Item 4', value: '4'},
-  {label: 'Item 5', value: '5'},
-  {label: 'Item 6', value: '6'},
-  {label: 'Item 7', value: '7'},
-  {label: 'Item 8', value: '8'},
+  { label: 'Item 2', value: '2' },
+  { label: 'Item 3', value: '3' },
+  { label: 'Item 4', value: '4' },
+  { label: 'Item 5', value: '5' },
+  { label: 'Item 6', value: '6' },
+  { label: 'Item 7', value: '7' },
+  { label: 'Item 8', value: '8' },
 ];
 
-const DropdownComponent = ({data, text, icon}) => {
+const DropdownComponent = ({ data, text, icon, setValueData }) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
-
   const renderLabel = () => {
     return (
-      <Text style={[styles.label, isFocus && {color: 'gray'}]}>{text}</Text>
+      <Text style={[styles.label, isFocus && { color: 'gray' }]}>{text}</Text>
     );
   };
 
@@ -32,13 +31,12 @@ const DropdownComponent = ({data, text, icon}) => {
     <View style={styles.container}>
       {renderLabel()}
       <Dropdown
-        style={[styles.dropdown, isFocus && {borderColor: 'gray'}]}
+        style={[styles.dropdown, isFocus && { borderColor: 'gray' }]}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
         iconStyle={styles.iconStyle}
         data={data}
-        search
         maxHeight={300}
         labelField="label"
         valueField="value"
@@ -50,6 +48,7 @@ const DropdownComponent = ({data, text, icon}) => {
         onChange={item => {
           setValue(item.value);
           setIsFocus(false);
+          setValueData(item.value)
         }}
         renderLeftIcon={() => (
           <Ionic
