@@ -2,6 +2,7 @@ import {
   View,
   StyleSheet,
   ScrollView,
+  Text,
   SafeAreaView,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
@@ -68,18 +69,36 @@ const Upload = () => {
     setImages(images)
   }
 
-  const gonder = async (images) => {
+  const gonder = async () => {
     const formData = new FormData()
-    formData.append('post', {
-      uri: images.assets[0].uri,
-      tpye: images.assets[0].type,
-      name: images.assets[0].fileName
-    })
-    formData.append('post', {
-      uri: images.assets[1].uri,
-      tpye: images.assets[1].type,
-      name: images.assets[1].fileName
-    })
+    // formData.append('post', {
+    //   uri: images.assets[0].uri,
+    //   tpye: images.assets[0].type,
+    //   name: images.assets[0].fileName
+    // })
+    // formData.append('post', {
+    //   uri: images.assets[1].uri,
+    //   tpye: images.assets[1].type,
+    //   name: images.assets[1].fileName
+    // })
+    formData.append('detail0', detail0)
+    formData.append('detail1', detail1)
+    formData.append('detail2', detail2)
+    formData.append('detail3', detail3)
+    formData.append('category', category)
+    formData.append('description', description)
+    formData.append('uid', uid)
+    let index = 0
+    images.assets.forEach(element => {
+      index += 1
+      if (index < 5) {
+        formData.append('post', {
+          uri: element.uri,
+          tpye: element.type,
+          name: element.fileName
+        })
+      }
+    });
     let res = await fetch(
       "http://10.100.0.11:5000/api/post",
       {
@@ -90,8 +109,8 @@ const Upload = () => {
         }
       }
     )
-    let resposeJson = await res.json()
-    console.log(resposeJson)
+    let responseJson = await res.json()
+    console.log(responseJson)
   }
 
   const yazdir = () => {
@@ -122,15 +141,8 @@ const Upload = () => {
               flexDirection: 'row',
               justifyContent: 'center',
               width: '100%',
-              maxHeight: 200,
+              maxHeight: 135,
             }}>
-            <CustomButton
-              text="Kamerayı Aç"
-              onPress={openImages}
-              bgColor="black"
-              fgColor="white"
-              type="SQUARE"
-            />
 
             <CustomButton
               text="Galeriyi Aç"
@@ -140,19 +152,50 @@ const Upload = () => {
               type="SQUARE"
             />
           </View>
+
           <View style={styles.bottomContainer}>
             <CustomInput
               placeholder="Soru Metni Giriniz"
               value={description}
               setValue={setDescription}
             />
-
-            <CustomButton
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: 'bold',
+                marginBottom: 20,
+                marginTop: 50,
+              }}>
+              Ürünle İlgili Detayları Buraya Girebilirsiniz
+            </Text>
+            <View style={styles.bottomContainer}>
+              <CustomInput
+                placeholder="Marka giriniz"
+                value={detail0}
+                setValue={setDetail0}
+              />
+              <CustomInput
+                placeholder="Beden giriniz"
+                value={detail1}
+                setValue={setDetail1}
+              />
+              <CustomInput
+                placeholder="Link"
+                value={detail2}
+                setValue={setDetail2}
+              />
+              <CustomInput
+                placeholder="Açıklama"
+                value={detail3}
+                setValue={setDetail3}
+              />
+            </View>
+            {/* <CustomButton
               text="Ürünlere detay girmek için tıklayınız"
               onPress={onDetailPressed}
-            />
+            /> */}
             <CustomButton text="Gönder" onPress={gonder} />
-            <CustomButton text="yazdir" onPress={yazdir} />
+            {/* <CustomButton text="yazdir" onPress={yazdir} /> */}
           </View>
         </View>
       </ScrollView>
@@ -164,7 +207,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     height: 700,
     alignItems: 'center',
-    marginTop: 80,
   },
   bottomContainer: {
     backgroundColor: 'white',
