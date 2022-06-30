@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, SafeAreaView} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import {useNavigation} from '@react-navigation/native';
 import CustomButton from '../screenComponents/CustomButton';
@@ -15,45 +15,52 @@ export const ProfileBody = ({
   following,
 }) => {
   return (
-    <View>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          borderRadius: 10,
-          //  backgroundColor: '#EEEEEE',
-          borderColor: 'white',
-          borderWidth: 2,
-          padding: 10,
-          marginBottom: 15,
-        }}>
+    <SafeAreaView>
+      <View>
         <View
           style={{
-            alignItems: 'center',
             flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            borderRadius: 10,
+            //  backgroundColor: '#EEEEEE',
+            borderColor: 'white',
+            borderWidth: 2,
+            padding: 10,
+            marginBottom: 15,
           }}>
-          <Image
-            source={{uri: profileImage}}
+          <View
             style={{
-              resizeMode: 'cover',
-              width: 100,
-              height: 100,
-              borderRadius: 100,
-            }}
-          />
-          <Text
-            style={{
-              paddingVertical: 5,
-              fontWeight: 'bold',
-              marginLeft: 20,
-              fontSize: 18,
+              flexDirection: 'column',
+              alignItems: 'center',
+              marginLeft: 100,
+              justifyContent: 'center',
+              marginBottom: 10,
+              marginTop: 30,
             }}>
-            {name}
-          </Text>
+            <Image
+              source={{uri: profileImage}}
+              style={{
+                resizeMode: 'cover',
+                width: 150,
+                height: 150,
+                borderRadius: 100,
+              }}
+            />
+            <Text
+              style={{
+                paddingVertical: 5,
+                fontWeight: 'bold',
+                marginLeft: 20,
+                fontSize: 20,
+                marginTop: 20,
+              }}>
+              {name}
+            </Text>
+          </View>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

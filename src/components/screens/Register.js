@@ -58,7 +58,7 @@ const Login = () => {
       <View
         style={{
           backgroundColor: 'white',
-          height: 700,
+          height: 800,
           alignItems: 'center',
         }}>
         <Text
