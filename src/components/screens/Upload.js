@@ -64,16 +64,6 @@ const Upload = () => {
 
   const gonder = async () => {
     const formData = new FormData();
-    // formData.append('post', {
-    //   uri: images.assets[0].uri,
-    //   tpye: images.assets[0].type,
-    //   name: images.assets[0].fileName
-    // })
-    // formData.append('post', {
-    //   uri: images.assets[1].uri,
-    //   tpye: images.assets[1].type,
-    //   name: images.assets[1].fileName
-    // })
     formData.append('detail0', detail0);
     formData.append('detail1', detail1);
     formData.append('detail2', detail2);
@@ -178,12 +168,8 @@ const Upload = () => {
                 setValue={setDetail3}
               />
             </View>
-            {/* <CustomButton
-              text="Ürünlere detay girmek için tıklayınız"
-              onPress={onDetailPressed}
-            /> */}
+
             <CustomButton text="Gönder" onPress={gonder} />
-            {/* <CustomButton text="yazdir" onPress={yazdir} /> */}
           </View>
         </View>
       </ScrollView>
@@ -204,18 +190,3 @@ const styles = StyleSheet.create({
 });
 
 export default Upload;
-
-/*import {View, Text} from 'react-native';
-import React from 'react';
-
-const Upload = () => {
-  return (
-    <View>
-      <Text>Upload</Text>
-    </View>
-  );
-};
-
-export default Upload;
-
-*/

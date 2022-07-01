@@ -196,7 +196,6 @@ const MyPosts = () => {
     if (user != null) {
       var myHeaders = new Headers();
       myHeaders.append('uid', user);
-      // myHeaders.append("uid", "61c70dd33174c6b0f2c80302");
 
       var requestOptions = {
         method: 'GET',

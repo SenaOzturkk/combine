@@ -15,7 +15,6 @@ import Ionic from 'react-native-vector-icons/Ionicons';
 import FriendProfile from './src/components/screenComponents/FriendProfile';
 import EditProfile from './src/components/screenComponents/EditProfile';
 import PostDetail from './src/components/screenComponents/PostDetail';
-import Votes from './src/components/screenComponents/Votes';
 import InitialScreen from './src/components/screens/InitialScreen';
 import MyPosts from './src/components/screenComponents/MyPosts';
 import AskedQuestion from './src/components/screenComponents/AskedQuestion';
@@ -77,7 +76,6 @@ const App = () => {
         <Stack.Screen name="NewPassword" component={NewPassword} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="PostDetail" component={PostDetail} />
-        <Stack.Screen name="Votes" component={Votes} />
         <Stack.Screen name="MyPosts" component={MyPosts} />
         <Stack.Screen name="AskedQuestion" component={AskedQuestion} />
         <Stack.Screen name="SpecialMessage" component={SpecialMessage} />

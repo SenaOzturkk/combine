@@ -59,7 +59,6 @@ const Post = ({postInfo, isCategory, categoryLoading}) => {
 
         let calculatePercent = 0;
         if (response.data.mediaCount == 1) {
-          // BURASI YES NO OLACAK ŞU AN 100 VERIR HEP
           calculatePercent = (response.data.votes[0] / sumVotes) * 100;
         } else if (response.data.mediaCount == 2) {
           if (postIndex == 0) {
@@ -187,16 +186,11 @@ const Post = ({postInfo, isCategory, categoryLoading}) => {
     setImage(null);
     setPpImage(null);
     setUsername('null');
-    // setPostDetail(null);
   };
   const onLongPressActivity = (data, pp, username, detail) => {
     setImage(data);
     setPpImage(pp);
     setUsername(username);
-
-    /*if (detail[0] == undefined) {
-      detail[0] = null;
-    }*/
     setPostMarka(detail[0]);
     setBeden(detail[1]);
     setLink(detail[2]);
