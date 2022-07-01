@@ -66,7 +66,7 @@ const Activity = () => {
                   />
                   <Text style={{fontSize: 15}}>
                     <Text style={{fontWeight: 'bold'}}>{data.name}</Text>
-                    Markası ne bedeni ne
+                    <Text style={{marginLeft: 15}}> Sorunuz Gönderildi</Text>
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setFollow(!follow)}>

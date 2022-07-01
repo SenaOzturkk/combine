@@ -1,24 +1,18 @@
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  Text,
-  SafeAreaView,
-} from 'react-native';
-import React, { useEffect, useState } from 'react';
+import {View, StyleSheet, ScrollView, Text, SafeAreaView} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import DropdownComponent from '../screenComponents/DropdownComponent';
 import CustomInput from '../screenComponents/CustomInput';
 import CustomButton from '../screenComponents/CustomButton';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { launchImageLibrary } from 'react-native-image-picker';
+import {launchImageLibrary} from 'react-native-image-picker';
 import baseURL from '../baseURL';
 
 const Upload = () => {
   const [images, setImages] = useState({});
   const [description, setDescription] = useState('');
-  const [uid, setUid] = useState()
-  const [category, setCategory] = useState('')
+  const [uid, setUid] = useState();
+  const [category, setCategory] = useState('');
   const [detail0, setDetail0] = useState('');
   const [detail1, setDetail1] = useState('');
   const [detail2, setDetail2] = useState('');
@@ -27,23 +21,22 @@ const Upload = () => {
   const navigation = useNavigation();
 
   const dataCategory = [
-    { label: 'Giyim', value: 'Giyim' },
-    { label: 'Teknoloji', value: 'Teknoloji' },
-    { label: 'Araba', value: 'Araba' },
-    { label: 'Eşya', value: 'Eşya' },
-    { label: 'Hediye', value: 'Hediye' },
-    { label: 'Tatil', value: 'Tatil' },
+    {label: 'Giyim', value: 'Giyim'},
+    {label: 'Teknoloji', value: 'Teknoloji'},
+    {label: 'Araba', value: 'Araba'},
+    {label: 'Eşya', value: 'Eşya'},
+    {label: 'Hediye', value: 'Hediye'},
+    {label: 'Tatil', value: 'Tatil'},
   ];
 
   const getUserID = async () => {
     const a = await AsyncStorage.getItem('USER');
-    setUid(a)
-  }
+    setUid(a);
+  };
 
   useEffect(() => {
-    getUserID()
+    getUserID();
   }, []);
-
 
   const onDetailPressed = () => {
     navigation.push('PostDetail', {
@@ -54,7 +47,7 @@ const Upload = () => {
       setDetail0,
       setDetail1,
       setDetail2,
-      setDetail3
+      setDetail3,
     });
   };
 
@@ -63,14 +56,14 @@ const Upload = () => {
       mediaType: 'photo',
       quality: 1,
       noData: true,
-      selectionLimit: 0
+      selectionLimit: 0,
     };
     const images = await launchImageLibrary(options);
-    setImages(images)
-  }
+    setImages(images);
+  };
 
   const gonder = async () => {
-    const formData = new FormData()
+    const formData = new FormData();
     // formData.append('post', {
     //   uri: images.assets[0].uri,
     //   tpye: images.assets[0].type,
@@ -81,42 +74,38 @@ const Upload = () => {
     //   tpye: images.assets[1].type,
     //   name: images.assets[1].fileName
     // })
-    formData.append('detail0', detail0)
-    formData.append('detail1', detail1)
-    formData.append('detail2', detail2)
-    formData.append('detail3', detail3)
-    formData.append('category', category)
-    formData.append('description', description)
-    formData.append('uid', uid)
-    let index = 0
+    formData.append('detail0', detail0);
+    formData.append('detail1', detail1);
+    formData.append('detail2', detail2);
+    formData.append('detail3', detail3);
+    formData.append('category', category);
+    formData.append('description', description);
+    formData.append('uid', uid);
+    let index = 0;
     images.assets.forEach(element => {
-      index += 1
+      index += 1;
       if (index < 5) {
         formData.append('post', {
           uri: element.uri,
           tpye: element.type,
-          name: element.fileName
-        })
+          name: element.fileName,
+        });
       }
     });
-    let res = await fetch(
-      "http://10.100.0.11:5000/api/post",
-      {
-        method: 'post',
-        body: formData,
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }
-    )
-    let responseJson = await res.json()
-    console.log(responseJson)
-  }
+    let res = await fetch('http://10.100.0.11:5000/api/post', {
+      method: 'post',
+      body: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    let responseJson = await res.json();
+    console.log(responseJson);
+  };
 
   const yazdir = () => {
-    console.log(detail0, detail1, detail2, detail3)
-  }
-
+    console.log(detail0, detail1, detail2, detail3);
+  };
 
   return (
     <SafeAreaView
@@ -143,7 +132,6 @@ const Upload = () => {
               width: '100%',
               maxHeight: 135,
             }}>
-
             <CustomButton
               text="Galeriyi Aç"
               onPress={openImages}
@@ -164,7 +152,7 @@ const Upload = () => {
                 fontSize: 16,
                 fontWeight: 'bold',
                 marginBottom: 20,
-                marginTop: 50,
+                marginTop: 10,
               }}>
               Ürünle İlgili Detayları Buraya Girebilirsiniz
             </Text>

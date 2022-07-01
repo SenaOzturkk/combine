@@ -66,14 +66,58 @@ const SpecialMessage = () => {
         </View>
         <View
           style={{
-            borderColor: 'black',
+            borderColor: 'gray',
             borderWidth: 1,
             width: '100%',
             height: 550,
-          }}></View>
+            borderRadius: 10,
+          }}>
+          <View
+            style={{
+              borderColor: 'black',
+              borderWidth: 1,
+              width: '70%',
+              height: 50,
+              marginTop: 420,
+              marginLeft: 115,
+              borderRadius: 10,
+              alignItems: 'stretch',
+              padding: 10,
+              backgroundColor: 'black',
+              color: 'white',
+            }}>
+            <Text
+              style={{
+                fontSize: 15,
+                color: 'white',
+              }}>
+              Markası Nedir?
+            </Text>
+          </View>
+          <View
+            style={{
+              borderColor: 'black',
+              borderWidth: 1,
+              width: '70%',
+              height: 50,
+              marginTop: 20,
+              borderRadius: 10,
+              alignItems: 'stretch',
+              padding: 10,
+              backgroundColor: 'black',
+            }}>
+            <Text
+              style={{
+                fontSize: 15,
+                color: 'white',
+              }}>
+              Mango
+            </Text>
+          </View>
+        </View>
         <View
           style={{
-            borderColor: 'black',
+            borderColor: 'gray',
             borderWidth: 1,
             width: '100%',
             height: 60,
@@ -81,6 +125,8 @@ const SpecialMessage = () => {
             alignItems: 'center',
             justifyContent: 'space-between',
             paddingHorizontal: 10,
+            borderRadius: 10,
+            marginTop: 6,
           }}>
           <TextInput placeholder="Mesaj yaz..."></TextInput>
           <CustomButton
